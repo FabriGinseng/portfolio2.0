@@ -1,0 +1,53 @@
+{
+  "nav": {
+    "about": "About",
+    "background": "Background",
+    "experience": "Experience",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Antonio Fabrizio Fiume",
+    "title": "Full Stack Developer",
+    "description": "Passionate about creating elegant solutions to complex problems",
+    "cta": "View My Work"
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "A brief introduction",
+    "description": "Hi! I’m Fabrizio, a Full-Stack Developer with a strong passion for Front-End and mobile development. I’ve had the chance to work on several ambitious projects, including “Campania in Salute”, an app that allows citizens to manage their healthcare directly from home. I took part in its design, development, and delivery — and it’s definitely one of the projects I’m most proud of. I love working with Vue.js (fast, flexible, and fun to use!) and I have experience building web apps with Ionic + Vue, as well as developing tools with Flask + Python (like a custom printing software for ESC/POS). Lately, I’ve been focusing on migrating legacy projects into modern solutions, building custom PWA that are responsive on every device. Always curious and eager to learn, I’ve also explored Docker and DevOps technologies to round out my skill set, along with backend development using Node.js. In short: I love building, innovating, and growing while embracing new challenges with enthusiasm"
+  },
+  "background": {
+    "title": "Background & Education",
+    "subtitle": "My learning journey"
+  },
+  "experience": {
+    "title": "Work Experience",
+    "subtitle": "Professional journey",
+    "present": "Present",
+    "sorint_description": "- Development of web platforms with Vue.js and Vuetify, building modern and responsive interfaces - Creation of web applications with Vue 3 and Vite, leveraging a fast and optimized build environment - Migration of legacy projects from Vue 2 to Vue 3, modernizing architecture and codebase - Backend development with Node.js and Fastify, focusing on scalable and high-performance APIs - Continuous training in unit testing with Jest and UX design, ensuring code quality and strong user experience focus",
+    "gesan_description": "Developed and maintained multiple client projects with focus on mobile performance and user experience. Collaborated with cross-functional teams to define and implement innovative solutions.",
+    "ak12_description": "Started my career building responsive mobile/web applications and learning best practices."
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "Things I've built",
+    "viewProject": "View Project",
+    "viewCode": "View Code"
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Let's work together",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "success": "Message sent successfully!",
+    "error": "Failed to send message. Please try again."
+  },
+  "footer": {
+    "rights": "All rights reserved"
+  }
+}

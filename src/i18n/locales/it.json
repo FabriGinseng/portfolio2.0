@@ -1,0 +1,53 @@
+{
+  "nav": {
+    "about": "Chi Sono",
+    "background": "Formazione",
+    "experience": "Esperienza",
+    "projects": "Progetti",
+    "contact": "Contatti"
+  },
+  "hero": {
+    "greeting": "Ciao, sono",
+    "name": "Antonio Fabrizio Fiume",
+    "title": "Sviluppatore Full Stack",
+    "description": "Appassionato nel creare soluzioni eleganti a problemi complessi",
+    "cta": "Vedi i Miei Lavori"
+  },
+  "about": {
+    "title": "Chi Sono",
+    "subtitle": "Una breve introduzione",
+    "description": "Ciao! Sono Fabrizio, sviluppatore Full-Stack con una passione particolare per il Front-End e il mobile development. Ho avuto la fortuna di lavorare a diversi progetti ambiziosi, tra cui “Campania in Salute”, un’app che permette ai cittadini di gestire la propria salute direttamente da casa: dalla progettazione allo sviluppo, ho seguito il progetto in ogni fase, ed è uno dei lavori di cui vado più fiero. Adoro lavorare con Vue.js, che considero veloce e versatile, e ho esperienza nello sviluppo di web app con Ionic + Vue, così come nell’uso di Flask + Python (per esempio per la creazione di un software di stampa per ESC/POS). Negli ultimi anni mi sto specializzando in migrazioni di progetti legacy, con soluzioni moderne come PWA personalizzate e completamente responsive. Sono sempre curioso di imparare: ho esplorato il mondo Docker e diverse tecnologie DevOps per ampliare il mio background, senza trascurare il backend con Node.js. In poche parole: amo costruire, innovare e crescere, affrontando ogni nuova sfida con entusiasmo"
+  },
+  "background": {
+    "title": "Formazione e Istruzione",
+    "subtitle": "Il mio percorso di apprendimento"
+  },
+  "experience": {
+    "title": "Esperienza Lavorativa",
+    "subtitle": "Percorso professionale",
+    "present": "Presente",
+    "sorint_description": "- Sviluppo di piattaforme web con Vue.js e Vuetify, creazione di interfacce moderne e reattive - Creazione di applicazioni web con Vue 3 e Vite, sfruttando un ambiente di sviluppo veloce e ottimizzato - Migrazione di progetti legacy da Vue 2 a Vue 3, modernizzazione dell'architettura e del codice base - Sviluppo backend con Node.js e Fastify, con particolare attenzione alle API scalabili e ad alte prestazioni - Formazione continua nel testing unitario con Jest e nella progettazione UX, garantendo la qualità del codice e una forte attenzione all'esperienza utente",
+    "gesan_description": "Sviluppo e manutenzione di molteplici progetti per clienti, con particolare attenzione alle performance su dispositivi mobili e all'esperienza utente. Collaborazione con team multifunzionali per definire e implementare soluzioni innovative.",
+    "ak12_description": "Inizio della mia carriera costruendo applicazioni mobile/web responsive e apprendendo le migliori pratiche."
+  },
+  "projects": {
+    "title": "Progetti",
+    "subtitle": "Cosa ho costruito",
+    "viewProject": "Vedi Progetto",
+    "viewCode": "Vedi Codice"
+  },
+  "contact": {
+    "title": "Contattami",
+    "subtitle": "Lavoriamo insieme",
+    "name": "Nome",
+    "email": "Email",
+    "message": "Messaggio",
+    "send": "Invia Messaggio",
+    "sending": "Invio in corso...",
+    "success": "Messaggio inviato con successo!",
+    "error": "Invio fallito. Riprova per favore."
+  },
+  "footer": {
+    "rights": "Tutti i diritti riservati"
+  }
+}
