@@ -20,7 +20,21 @@
   },
   "background": {
     "title": "Background & Education",
-    "subtitle": "My learning journey"
+    "subtitle": "My learning journey",
+    "education": [
+      {
+        "degree": "Master's Degree in Computer Engineering",
+        "institution": "Università Uninettuno",
+        "period": "2024 - Present",
+        "description": "Specialized in Big Data and Cloud Computing"
+      },
+      {
+        "degree": "Bachelor's Degree in Computer Engineering",
+        "institution": "Università degli Studi di Napoli Federico II/ Universitas Mercatorum",
+        "period": "2019 - 2022",
+        "description": "Foundation in programming, algorithms, and data structures. Emphasis on practical applications and real-world problem solving."
+      }
+    ]
   },
   "experience": {
     "title": "Work Experience",
@@ -34,7 +48,37 @@
     "title": "Projects",
     "subtitle": "Things I've built",
     "viewProject": "View Project",
-    "viewCode": "View Code"
+    "viewCode": "View Code",
+    "items": [
+      {
+        "title": "Campania In Salute App",
+        "description": "Full-featured health app for managing health data and appointments, with a user-friendly interface, secure data handling, and seamless integration with healthcare providers."
+      },
+      {
+        "title": "ARPA",
+        "description": "ARPA has transformed the procurement process for a global technology company, making it more efficient and traceable."
+      },
+      {
+        "title": "REFIT- REST METHODS NUGET PACKAGE",
+        "description": "A .NET library that simplifies HTTP requests by providing a declarative way to define REST API clients using interfaces and attributes."
+      },
+      {
+        "title": "Entropia didattica: una nuova misura per la similarità tra mappe concettuali",
+        "description": "The thesis work carried out with supervisor prof. Filippo Sciarrone. The project set out to find and describe, through a web platform, a new measure of similarity between concept maps."
+      },
+      {
+        "title": "Old Portfolio Website",
+        "description": "My previous portfolio website showcasing my projects and skills before the current version."
+      },
+      {
+        "title": "QuickQueueSystem",
+        "description": "A system for managing and optimizing queues in various environments, enhancing customer experience and operational efficiency."
+      },
+      {
+        "title": "E-commerce template",
+        "description": "Modern e-commerce platform with product management"
+      }
+    ]
   },
   "contact": {
     "title": "Get In Touch",

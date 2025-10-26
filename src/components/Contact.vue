@@ -17,6 +17,7 @@
         </div>
         
         <form 
+          ref="contactForm"
           @submit.prevent="handleSubmit" 
           class="space-y-6 bg-card/80 backdrop-blur-sm border border-primary/20 rounded-2xl p-8 md:p-10 shadow-2xl"
         >
@@ -27,6 +28,7 @@
             <input
               id="name"
               v-model="form.name"
+              name="from_name"
               type="text"
               required
               class="w-full px-4 py-3 border border-border/50 rounded-xl bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
@@ -41,6 +43,7 @@
             <input
               id="email"
               v-model="form.email"
+              name="reply_to"
               type="email"
               required
               class="w-full px-4 py-3 border border-border/50 rounded-xl bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
@@ -55,6 +58,7 @@
             <textarea
               id="message"
               v-model="form.message"
+              name="message"
               rows="5"
               required
               class="w-full px-4 py-3 border border-border/50 rounded-xl bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none transition-all duration-300"
@@ -136,6 +140,8 @@ onMounted(() => {
   emailjs.init(EMAILJS_PUBLIC_KEY)
 })
 
+const contactForm = ref<HTMLFormElement | null>(null)
+
 const form = reactive({
   name: '',
   email: '',
@@ -146,29 +152,24 @@ const isSubmitting = ref(false)
 const submitStatus = ref<'success' | 'error' | null>(null)
 
 const handleSubmit = async () => {
+  if (!contactForm.value) return
+  
   isSubmitting.value = true
   submitStatus.value = null
   
   try {
-    // Prepare template parameters for EmailJS
-    const templateParams = {
-      to_email: form.email, // Your email (where you receive)
-      to_name: form.name,
-      from_name: 'Antonio Fabrizio Fiume',                          // Sender's name
-      from_email: 'antoniofabriziofiume95@gmail.com',                        // Sender's email
-      message: form.message,
-      reply_to: form.email
-    }
-
-    console.log('Sending email with params:', templateParams)
+    console.log('Sending email...')
     console.log('Service ID:', EMAILJS_SERVICE_ID)
     console.log('Template ID:', EMAILJS_TEMPLATE_ID)
 
-    // Send email using EmailJS with proper structure
-    const response = await emailjs.send(
+    // Send email using EmailJS sendForm with the form element
+    const response = await emailjs.sendForm(
       EMAILJS_SERVICE_ID,
       EMAILJS_TEMPLATE_ID,
-      templateParams
+      contactForm.value,
+      {
+        publicKey: EMAILJS_PUBLIC_KEY
+      }
     )
     
     console.log('EmailJS Response:', response)

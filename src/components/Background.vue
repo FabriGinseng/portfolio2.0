@@ -13,7 +13,7 @@
         
         <div class="space-y-8">
           <div 
-            v-for="(item, index) in education" 
+            v-for="(_, index) in education" 
             :key="index"
             class="group transform transition-all duration-700 hover:scale-[1.02]"
             :class="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'"
@@ -28,17 +28,19 @@
                     </div>
                     <div class="flex-1">
                       <h3 class="text-2xl font-bold mb-2 text-foreground group-hover:text-accent transition-colors">
-                        {{ item.degree }}
+                        {{ t(`background.education.${index}.degree`) }}
                       </h3>
                       <p class="text-lg font-semibold text-primary mb-3">
-                        {{ item.institution }}
+                        {{ t(`background.education.${index}.institution`) }}
                       </p>
-                      <p class="text-foreground/80 dark:text-muted-foreground leading-relaxed">{{ item.description }}</p>
+                      <p class="text-foreground/80 dark:text-muted-foreground leading-relaxed">
+                        {{ t(`background.education.${index}.description`) }}
+                      </p>
                     </div>
                   </div>
                 </div>
                 <div class="text-sm font-medium px-4 py-2 bg-muted/30 rounded-lg border border-border/50 md:text-right whitespace-nowrap">
-                  {{ item.period }}
+                  {{ t(`background.education.${index}.period`) }}
                 </div>
               </div>
             </div>
@@ -74,19 +76,7 @@ onUnmounted(() => {
   window.removeEventListener('scroll', checkVisibility)
 })
 
-// Replace with your actual education data
-const education = [
-  {
-    degree: 'Master\'s Degree in Computer Engineering',
-    institution: 'Università Uninettuno',
-    period: '2024 - Present',
-    description: 'Specialized in Big Data and Cloud Computing'
-  },
-  {
-    degree: 'Bachelor\'s Degree in Computer Engineering',
-    institution: 'Università degli Studi di Napoli Federico II/ Universitas Mercatorum',
-    period: '2019 - 2022',
-    description: 'Foundation in programming, algorithms, and data structures. Emphasis on practical applications and real-world problem solving.'
-  }
-]
+// Education data length - used for v-for
+const education = [0, 1] // Array indices for i18n
+
 </script>

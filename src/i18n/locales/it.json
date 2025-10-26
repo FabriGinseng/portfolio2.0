@@ -20,7 +20,21 @@
   },
   "background": {
     "title": "Formazione e Istruzione",
-    "subtitle": "Il mio percorso di apprendimento"
+    "subtitle": "Il mio percorso di apprendimento",
+    "education": [
+      {
+        "degree": "Laurea Magistrale in Ingegneria Informatica",
+        "institution": "Università Uninettuno",
+        "period": "2024 - Presente",
+        "description": "Specializzazione in Big Data e Cloud Computing"
+      },
+      {
+        "degree": "Laurea Triennale in Ingegneria Informatica",
+        "institution": "Università degli Studi di Napoli Federico II/ Universitas Mercatorum",
+        "period": "2019 - 2022",
+        "description": "Fondamenti di programmazione, algoritmi e strutture dati. Enfasi su applicazioni pratiche e risoluzione di problemi del mondo reale."
+      }
+    ]
   },
   "experience": {
     "title": "Esperienza Lavorativa",
@@ -34,7 +48,37 @@
     "title": "Progetti",
     "subtitle": "Cosa ho costruito",
     "viewProject": "Vedi Progetto",
-    "viewCode": "Vedi Codice"
+    "viewCode": "Vedi Codice",
+    "items": [
+      {
+        "title": "Campania In Salute App",
+        "description": "App completa per la gestione dei dati sanitari e degli appuntamenti, con un'interfaccia user-friendly, gestione sicura dei dati e integrazione perfetta con i fornitori di servizi sanitari."
+      },
+      {
+        "title": "ARPA",
+        "description": "ARPA ha trasformato il processo di approvvigionamento per un'azienda tecnologica globale, rendendolo più efficiente e tracciabile."
+      },
+      {
+        "title": "REFIT- REST METHODS NUGET PACKAGE",
+        "description": "Una libreria .NET che semplifica le richieste HTTP fornendo un modo dichiarativo per definire client API REST utilizzando interfacce e attributi."
+      },
+      {
+        "title": "Entropia didattica: una nuova misura per la similarità tra mappe concettuali",
+        "description": "Il lavoro di tesi svolto con il supervisore prof. Filippo Sciarrone. Il progetto si è proposto di trovare e descrivere, attraverso una piattaforma web, una nuova misura di similarità tra mappe concettuali."
+      },
+      {
+        "title": "Vecchio Sito Portfolio",
+        "description": "Il mio precedente sito portfolio che mostra i miei progetti e competenze prima della versione attuale."
+      },
+      {
+        "title": "QuickQueueSystem",
+        "description": "Un sistema per gestire e ottimizzare le code in vari ambienti, migliorando l'esperienza del cliente e l'efficienza operativa."
+      },
+      {
+        "title": "Template E-commerce",
+        "description": "Piattaforma e-commerce moderna con gestione prodotti"
+      }
+    ]
   },
   "contact": {
     "title": "Contattami",

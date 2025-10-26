@@ -52,10 +52,10 @@
               
               <div class="p-6 flex-1 flex flex-col">
                 <h3 class="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
-                  {{ project.title }}
+                  {{ t(`projects.items.${index}.title`) }}
                 </h3>
                 <p class="text-foreground/70 dark:text-muted-foreground text-sm mb-4 flex-1">
-                  {{ project.description }}
+                  {{ t(`projects.items.${index}.description`) }}
                 </p>
                 
                 <div class="flex flex-wrap gap-2">
