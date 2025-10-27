@@ -1,7 +1,7 @@
 <template>
   <header 
     class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-    :class="scrolled ? 'bg-background/95 backdrop-blur-xl border-b border-primary/20 shadow-lg shadow-primary/5' : 'bg-transparent'"
+    :class="scrolled ? 'bg-background/95 backdrop-blur-xl' : 'bg-transparent'"
   >
     <nav class="container mx-auto px-4 h-20 flex items-center justify-between">
       <!-- Logo -->

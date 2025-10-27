@@ -21,6 +21,7 @@
   "background": {
     "title": "Background & Education",
     "subtitle": "My learning journey",
+    "publicationsTitle": "Publications",
     "education": [
       {
         "degree": "Master's Degree in Computer Engineering",
@@ -33,6 +34,15 @@
         "institution": "Università degli Studi di Napoli Federico II/ Universitas Mercatorum",
         "period": "2019 - 2022",
         "description": "Foundation in programming, algorithms, and data structures. Emphasis on practical applications and real-world problem solving."
+      }
+    ],
+    "publications": [
+      {
+        "title": "A New Metric to Help Teachers Unveil Meaningful Learning in Concept Maps",
+        "publisher": "Springer",
+        "editors": "Marco Temperini, Vittorio Scarano, Ivana Marenzi, Milos Kravcik, Elvira Popescu, Rosa Lanzilotti, Rosella Gennari, Fernando De La Prieta, Tania Di Mascio, Pierpaolo Vittorini",
+        "date": "November 23, 2022",
+        "url": "https://link.springer.com/book/10.1007/978-3-031-20617-7#author-1-9"
       }
     ]
   },

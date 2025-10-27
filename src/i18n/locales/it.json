@@ -21,6 +21,7 @@
   "background": {
     "title": "Formazione e Istruzione",
     "subtitle": "Il mio percorso di apprendimento",
+    "publicationsTitle": "Pubblicazioni",
     "education": [
       {
         "degree": "Laurea Magistrale in Ingegneria Informatica",
@@ -33,6 +34,15 @@
         "institution": "Università degli Studi di Napoli Federico II/ Universitas Mercatorum",
         "period": "2019 - 2022",
         "description": "Fondamenti di programmazione, algoritmi e strutture dati. Enfasi su applicazioni pratiche e risoluzione di problemi del mondo reale."
+      }
+    ],
+    "publications": [
+      {
+        "title": "Una Nuova Metrica per Aiutare gli Insegnanti a Svelare l'Apprendimento Significativo nelle Mappe Concettuali",
+        "publisher": "Springer",
+        "editors": "Marco Temperini, Vittorio Scarano, Ivana Marenzi, Milos Kravcik, Elvira Popescu, Rosa Lanzilotti, Rosella Gennari, Fernando De La Prieta, Tania Di Mascio, Pierpaolo Vittorini",
+        "date": "23 novembre 2022",
+        "url": "https://link.springer.com/book/10.1007/978-3-031-20617-7#author-1-9"
       }
     ]
   },

@@ -46,6 +46,57 @@
             </div>
           </div>
         </div>
+
+        <!-- Publications Section -->
+        <div class="mt-20">
+          <h3 class="text-3xl font-bold text-center mb-10 text-primary">
+            {{ t('background.publicationsTitle') }}
+          </h3>
+          
+          <div class="space-y-6">
+            <div 
+              v-for="(_, index) in publications" 
+              :key="`pub-${index}`"
+              class="group transform transition-all duration-700 hover:scale-[1.02]"
+              :class="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'"
+              :style="{ transitionDelay: `${(education.length + index) * 150}ms` }"
+            >
+              <a 
+                :href="t(`background.publications.${index}.url`)"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="block bg-card/80 backdrop-blur-sm border border-primary/20 rounded-2xl p-6 md:p-8 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:border-primary/50"
+              >
+                <div class="flex items-start gap-4">
+                  <div class="p-3 bg-primary rounded-xl shadow-lg flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" :size="24" class="text-white" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h4 class="text-xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors">
+                      {{ t(`background.publications.${index}.title`) }}
+                    </h4>
+                    <p class="text-sm text-secondary font-semibold mb-2">
+                      {{ t(`background.publications.${index}.publisher`) }}
+                    </p>
+                    <p class="text-xs text-foreground/60 dark:text-muted-foreground mb-2">
+                      {{ t(`background.publications.${index}.editors`) }}
+                    </p>
+                    <p class="text-xs text-foreground/50 dark:text-muted-foreground">
+                      {{ t(`background.publications.${index}.date`) }}
+                    </p>
+                  </div>
+                  <div class="flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary">
+                      <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -78,5 +129,6 @@ onUnmounted(() => {
 
 // Education data length - used for v-for
 const education = [0, 1] // Array indices for i18n
+const publications = [0] // Array indices for publications
 
 </script>
