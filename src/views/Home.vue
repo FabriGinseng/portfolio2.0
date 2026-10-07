@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen">
+  <div>
     <Header />
-    <main class="pt-20">
+    <main>
       <Hero />
       <About />
       <Background />

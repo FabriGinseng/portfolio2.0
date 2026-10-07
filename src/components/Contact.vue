@@ -1,123 +1,55 @@
 <template>
-  <section id="contact" class="relative py-32 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-background via-primary/5 to-secondary/5"></div>
-    
-    <!-- Elementi decorativi -->
-    <div class="absolute top-0 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
-    
-    <div class="container mx-auto px-4 relative z-10">
-      <div class="max-w-2xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold mb-4 text-primary">
-            {{ t('contact.title') }}
-          </h2>
-          <div class="h-1 w-24 mx-auto bg-gradient-to-r from-primary via-secondary to-accent rounded-full mb-4"></div>
-          <p class="text-lg text-foreground/70 dark:text-muted-foreground">{{ t('contact.subtitle') }}</p>
-        </div>
-        
-        <form 
-          ref="contactForm"
-          @submit.prevent="handleSubmit" 
-          class="space-y-6 bg-card/80 backdrop-blur-sm border border-primary/20 rounded-2xl p-8 md:p-10 shadow-2xl"
+  <section id="contact" class="border-t border-line py-24 md:py-32">
+    <div class="mx-auto grid max-w-6xl gap-16 px-5 md:grid-cols-2 md:px-8">
+      <div>
+        <h2 class="font-display text-4xl font-semibold tracking-tight md:text-6xl">{{ t('contact.title') }}</h2>
+        <p class="mt-4 max-w-[40ch] text-lg text-muted">{{ t('contact.subtitle') }}</p>
+        <a
+          href="mailto:antoniofabriziofiume95@gmail.com"
+          class="mt-8 inline-block break-all font-display text-xl font-semibold text-accent underline decoration-1 underline-offset-4 md:text-2xl"
         >
-          <div class="space-y-2">
-            <label for="name" class="block text-sm font-semibold text-foreground">
-              {{ t('contact.name') }}
-            </label>
-            <input
-              id="name"
-              v-model="form.name"
-              name="from_name"
-              type="text"
-              required
-              class="w-full px-4 py-3 border border-border/50 rounded-xl bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
-              placeholder="Mario Rossi"
-            />
-          </div>
-          
-          <div class="space-y-2">
-            <label for="email" class="block text-sm font-semibold text-foreground">
-              {{ t('contact.email') }}
-            </label>
-            <input
-              id="email"
-              v-model="form.email"
-              name="reply_to"
-              type="email"
-              required
-              class="w-full px-4 py-3 border border-border/50 rounded-xl bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
-              placeholder="mario@example.com"
-            />
-          </div>
-          
-          <div class="space-y-2">
-            <label for="message" class="block text-sm font-semibold text-foreground">
-              {{ t('contact.message') }}
-            </label>
-            <textarea
-              id="message"
-              v-model="form.message"
-              name="message"
-              rows="5"
-              required
-              class="w-full px-4 py-3 border border-border/50 rounded-xl bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none transition-all duration-300"
-              :placeholder="t('contact.message') + '...'"
-            ></textarea>
-          </div>
-          
-          <button
-            type="submit"
-            :disabled="isSubmitting"
-            class="w-full px-8 py-4 bg-gradient-to-r from-primary via-secondary to-accent rounded-xl font-semibold hover:shadow-2xl hover:shadow-primary/50 transition-all duration-300 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-          >
-            {{ isSubmitting ? t('contact.sending') : t('contact.send') }}
-          </button>
-          
-          <div v-if="submitStatus" class="text-center pt-4">
-            <p 
-              :class="submitStatus === 'success' ? 'text-accent' : 'text-destructive'"
-              class="text-sm font-semibold flex items-center justify-center gap-2"
-            >
-              <span v-if="submitStatus === 'success'">✓</span>
-              <span v-else>✗</span>
-              {{ submitStatus === 'success' ? t('contact.success') : t('contact.error') }}
-            </p>
-          </div>
-        </form>
-        
-        <!-- Social Links -->
-        <div class="mt-16">
-          <p class="text-center text-sm text-foreground/60 dark:text-muted-foreground mb-6">O contattami tramite</p>
-          <div class="flex justify-center gap-6">
-            <a 
-              href="https://github.com/fabriGinseng" 
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group p-5 rounded-2xl bg-card border border-primary/20 hover:border-primary hover:shadow-2xl hover:shadow-primary/30 transition-all duration-300 hover:scale-110"
-              aria-label="GitHub"
-            >
-              <Github :size="28" class="text-primary group-hover:scale-110 transition-transform" />
+          antoniofabriziofiume95@gmail.com
+        </a>
+        <ul class="mt-8 flex gap-6">
+          <li>
+            <a href="https://github.com/fabriGinseng" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-muted hover:text-ink">
+              <Github :size="18" /> GitHub
             </a>
-            <a 
-              href="https://www.linkedin.com/in/antonio-fabrizio-fiume-13345a160/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group p-5 rounded-2xl bg-card border border-secondary/20 hover:border-secondary hover:shadow-2xl hover:shadow-secondary/30 transition-all duration-300 hover:scale-110"
-              aria-label="LinkedIn"
-            >
-              <Linkedin :size="28" class="text-secondary group-hover:scale-110 transition-transform" />
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/antonio-fabrizio-fiume-13345a160/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-muted hover:text-ink">
+              <Linkedin :size="18" /> LinkedIn
             </a>
-            <a 
-              href="mailto:antoniofabriziofiume95@gmail.com"
-              class="group p-5 rounded-2xl bg-card border border-accent/20 hover:border-accent hover:shadow-2xl hover:shadow-accent/30 transition-all duration-300 hover:scale-110"
-              aria-label="Email"
-            >
-              <Mail :size="28" class="text-accent group-hover:scale-110 transition-transform" />
-            </a>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
+
+      <form ref="contactForm" @submit.prevent="handleSubmit" class="space-y-6">
+        <div class="space-y-2">
+          <label for="name" class="block text-sm font-medium">{{ t('contact.name') }}</label>
+          <input id="name" v-model="form.name" name="from_name" type="text" required autocomplete="name" class="w-full rounded-md border border-field bg-transparent px-4 py-3 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent" />
+        </div>
+        <div class="space-y-2">
+          <label for="email" class="block text-sm font-medium">{{ t('contact.email') }}</label>
+          <input id="email" v-model="form.email" name="reply_to" type="email" required autocomplete="email" class="w-full rounded-md border border-field bg-transparent px-4 py-3 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent" />
+        </div>
+        <div class="space-y-2">
+          <label for="message" class="block text-sm font-medium">{{ t('contact.message') }}</label>
+          <textarea id="message" v-model="form.message" name="message" rows="5" required class="w-full rounded-md border border-field bg-transparent px-4 py-3 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent resize-none"></textarea>
+        </div>
+
+        <button
+          type="submit"
+          :disabled="isSubmitting"
+          class="w-full whitespace-nowrap rounded-md bg-accent px-6 py-3.5 font-medium text-on-accent transition-transform active:scale-[0.98] disabled:opacity-50 md:w-auto"
+        >
+          {{ isSubmitting ? t('contact.sending') : t('contact.send') }}
+        </button>
+
+        <p v-if="submitStatus" role="status" class="text-sm font-medium" :class="submitStatus === 'success' ? 'text-ink' : 'text-danger'">
+          {{ submitStatus === 'success' ? t('contact.success') : t('contact.error') }}
+        </p>
+      </form>
     </div>
   </section>
 </template>
@@ -125,7 +57,7 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { Github, Linkedin, Mail } from 'lucide-vue-next'
+import { Github, Linkedin } from 'lucide-vue-next'
 import emailjs from '@emailjs/browser'
 
 const { t } = useI18n()
@@ -158,12 +90,8 @@ const handleSubmit = async () => {
   submitStatus.value = null
   
   try {
-    console.log('Sending email...')
-    console.log('Service ID:', EMAILJS_SERVICE_ID)
-    console.log('Template ID:', EMAILJS_TEMPLATE_ID)
-
     // Send email using EmailJS sendForm with the form element
-    const response = await emailjs.sendForm(
+    await emailjs.sendForm(
       EMAILJS_SERVICE_ID,
       EMAILJS_TEMPLATE_ID,
       contactForm.value,
@@ -172,7 +100,6 @@ const handleSubmit = async () => {
       }
     )
     
-    console.log('EmailJS Response:', response)
     submitStatus.value = 'success'
     
     // Reset form
