@@ -25,6 +25,14 @@
         >
           {{ t('contact.title') }}
         </a>
+        <a
+          href="/cv-antonio-fiume.pdf"
+          download
+          class="inline-flex items-center gap-2 whitespace-nowrap rounded-md border border-field px-6 py-3.5 font-medium transition-colors hover:border-accent hover:text-accent active:scale-[0.98]"
+        >
+          {{ t('hero.cv') }}
+          <Download :size="18" />
+        </a>
       </div>
     </div>
   </section>
@@ -33,7 +41,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { ArrowDown } from 'lucide-vue-next'
+import { ArrowDown, Download } from 'lucide-vue-next'
 
 const { t } = useI18n()
 // Il nome va su due righe fisse: così l'animazione di larghezza non fa saltare l'a capo.
