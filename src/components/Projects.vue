@@ -62,6 +62,12 @@ const projects = [
     liveUrl: 'https://apps.apple.com/it/app/campania-in-salute/id1526791777',
   },
   {
+    title: 'LLM Agent for EHR Querying',
+    icon: 'https://avatars.githubusercontent.com/u/28861456?v=4',
+    technologies: ['TypeScript', 'Node.js', 'LangGraph', 'Gemini', 'ChromaDB', 'FHIR'],
+    liveUrl: 'https://github.com/FabriGinseng/progetto-tesi',
+  },
+  {
     title: 'ARPA',
     icon: '/img/arpa.png',
     technologies: ['Vue js', 'Javascript', 'Vuetify', 'Pinia'],

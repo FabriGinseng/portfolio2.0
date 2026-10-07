@@ -11,7 +11,8 @@
     "name": "Antonio Fabrizio Fiume",
     "title": "Sviluppatore Full Stack",
     "description": "Appassionato nel creare soluzioni eleganti a problemi complessi",
-    "cta": "Vedi i Miei Lavori"
+    "cta": "Vedi i Miei Lavori",
+    "cv": "Scarica il CV"
   },
   "about": {
     "title": "Chi Sono",
@@ -65,6 +66,10 @@
       {
         "title": "Campania In Salute App",
         "description": "App completa per la gestione dei dati sanitari e degli appuntamenti, con un'interfaccia user-friendly, gestione sicura dei dati e integrazione perfetta con i fornitori di servizi sanitari."
+      },
+      {
+        "title": "LLM Agent for EHR Querying",
+        "description": "Proof of concept della tesi magistrale: un agente LLM che risponde alle domande di un medico su un Fascicolo Sanitario Elettronico simulato, scegliendo via tool calling tra interrogazioni FHIR strutturate e ricerca semantica (RAG) sui referti, con isolamento dei dati per paziente e metriche di latenza e token per la valutazione."
       },
       {
         "title": "ARPA",

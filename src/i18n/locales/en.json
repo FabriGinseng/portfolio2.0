@@ -11,7 +11,8 @@
     "name": "Antonio Fabrizio Fiume",
     "title": "Full Stack Developer",
     "description": "Passionate about creating elegant solutions to complex problems",
-    "cta": "View My Work"
+    "cta": "View My Work",
+    "cv": "Download CV"
   },
   "about": {
     "title": "About Me",
@@ -65,6 +66,10 @@
       {
         "title": "Campania In Salute App",
         "description": "Full-featured health app for managing health data and appointments, with a user-friendly interface, secure data handling, and seamless integration with healthcare providers."
+      },
+      {
+        "title": "LLM Agent for EHR Querying",
+        "description": "Master's thesis proof of concept: an LLM agent that answers a doctor's questions on a simulated electronic health record, choosing via tool calling between structured FHIR API queries and semantic search (RAG) over clinical reports, with per-patient data isolation and latency/token metrics for evaluation."
       },
       {
         "title": "ARPA",
