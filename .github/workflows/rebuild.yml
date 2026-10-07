@@ -1,4 +1,5 @@
 # Ricostruisce il sito su Vercel ogni giorno, così il sync vede i repo nuovi o cambiati.
+# Usa l'API di Vercel (token personale) invece dei Deploy Hook, che sull'account dell'autore risultano solo per piano Pro.
 # Il cron gira solo dal branch di default; GitHub lo sospende dopo 60 giorni senza attività nel repo (si riattiva a mano).
 name: Rebuild
 
@@ -13,10 +14,16 @@ jobs:
   rebuild:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Vercel Deploy Hook
+      - name: Create a production deployment from main
         env:
-          HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          PROJECT: ${{ secrets.VERCEL_PROJECT }}
+          GITHUB_REPO_ID: '1081425248' # FabriGinseng/portfolio2.0
         run: |
-          test -n "$HOOK" || { echo "Secret VERCEL_DEPLOY_HOOK mancante"; exit 1; }
-          curl --fail --silent --show-error -X POST "$HOOK" > /dev/null
-          echo "Deploy richiesto"
+          test -n "$VERCEL_TOKEN" && test -n "$PROJECT" || { echo "Mancano i secret VERCEL_TOKEN e/o VERCEL_PROJECT"; exit 1; }
+          body=$(jq -n --arg p "$PROJECT" --argjson id "$GITHUB_REPO_ID" \
+            '{name:$p, project:$p, target:"production", gitSource:{type:"github", ref:"main", repoId:$id}}')
+          curl --fail-with-body --silent --show-error -X POST \
+            "https://api.vercel.com/v13/deployments?forceNew=1" \
+            -H "Authorization: Bearer $VERCEL_TOKEN" -H "Content-Type: application/json" \
+            -d "$body" | jq '{id, url, readyState}'
