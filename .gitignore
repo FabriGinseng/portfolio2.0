@@ -39,3 +39,4 @@ lerna-debug.log*
 
 # generato dal sync dei progetti da GitHub
 src/data/projects.synced.json
+public/img/synced/
