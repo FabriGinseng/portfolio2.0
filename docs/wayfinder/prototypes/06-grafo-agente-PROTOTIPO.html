@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PROTOTIPO – Grafo dell'Agente di redazione</title>
+<style>
+  :root { --ink:#1b1f24; --muted:#5d6670; --line:#dde1e6; --bg:#f7f8fa; --card:#fff; --accent:#1f4e79; --warn:#b3261e; --ok:#1e7a46; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; color:var(--ink); background:var(--bg); }
+  main { max-width: 1040px; margin: 0 auto; padding: 28px 18px 80px; }
+  h1 { font-size: 24px; margin: 0 0 6px; }
+  h2 { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); margin: 28px 0 10px; }
+  .stamp { display:inline-block; font-size:12px; border:1px solid var(--warn); color:var(--warn); padding:1px 8px; border-radius:99px; margin-bottom:10px; }
+  .intro { background: var(--card); border:1px solid var(--line); border-left:4px solid var(--accent); padding:12px 16px; border-radius:6px; }
+  .card { background: var(--card); border:1px solid var(--line); border-radius:8px; padding:14px 16px; }
+  .grid { display:grid; grid-template-columns: 1fr 1fr; gap:14px; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+  .flow { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+  .node { border:1px solid var(--line); background:var(--card); padding:6px 10px; border-radius:6px; font-size:13px; text-align:center; }
+  .node small { display:block; color:var(--muted); font-size:11px; }
+  .node.on { border-color: var(--accent); background: var(--accent); color:#fff; }
+  .node.on small { color:#dbe7f3; }
+  .arrow { color: var(--muted); }
+  .kv { display:grid; grid-template-columns: 150px 1fr; gap:4px 10px; margin:0; }
+  .kv dt { color: var(--muted); }
+  .kv dd { margin:0; }
+  .changed { background:#fff6cc; border-radius:3px; padding:0 4px; }
+  .bad { color: var(--warn); font-weight:600; }
+  .good { color: var(--ok); font-weight:600; }
+  .tag { font-size:11px; background:#fff6cc; border-radius:99px; padding:0 7px; margin-left:6px; }
+  button { font:inherit; padding:7px 12px; border:1px solid var(--line); background:var(--card); border-radius:6px; cursor:pointer; }
+  button:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+  button:disabled { opacity:.45; cursor: default; }
+  button.primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+  button.primary:hover:not(:disabled) { color:#fff; opacity:.92; }
+  .row { display:flex; flex-wrap:wrap; gap:8px; margin:6px 0; }
+  .tabs { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+  .tabs button.sel { background: var(--ink); color:#fff; border-color: var(--ink); }
+  ol.steps { list-style:none; padding:0; margin:8px 0 0; display:flex; flex-direction:column; gap:6px; }
+  ol.steps li { display:flex; gap:8px; align-items:center; }
+  ol.steps .n { width:22px; color:var(--muted); font-size:13px; text-align:right; }
+  .done { color: var(--ok); }
+  code, pre { font: 12.5px/1.45 ui-monospace, Menlo, monospace; }
+  pre { background:#f1f3f5; border-radius:6px; padding:8px 10px; margin:8px 0 0; overflow:auto; white-space:pre-wrap; }
+  .msg { padding:10px 14px; border-radius:6px; border:1px solid var(--line); background:#eef4fa; }
+  .msg.refused { background:#fdecea; border-color:#f3b8b3; }
+  ul.log { margin:0; padding-left:18px; color: var(--muted); font-size: 13px; }
+  label.chk { display:block; margin:3px 0; }
+  .muted { color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <span class="stamp">PROTOTIPO · da buttare · nessuna API reale, nessun salvataggio</span>
+  <h1>Agente di redazione: il flusso passo per passo</h1>
+
+  <div class="intro">
+    <b>La domanda che questo prototipo mette alla prova:</b> il flusso che abbiamo in mente
+    (scegli un repo → leggilo → scrivi una bozza di <code>portfolio.json</code> → controllala → fai decidere a una persona → apri la PR)
+    gestisce bene i casi scomodi? Cioè: il modello sbaglia la bozza, il repo è vuoto o enorme, la persona corregge,
+    il processo si interrompe a metà. Qui il modello e i repo sono finti e deterministici: serve solo a vedere il <i>flusso</i> e lo <i>stato</i>.
+    Clicca un percorso guidato qui sotto, oppure gioca libero con i pulsanti.
+  </div>
+
+  <h2>Il grafo</h2>
+  <div class="card"><div class="flow" id="flow"></div>
+    <p class="muted" style="margin:10px 0 0;font-size:13px" id="flowNotes"></p>
+  </div>
+
+  <div class="grid" style="margin-top:14px">
+    <div>
+      <h2>Stato attuale</h2>
+      <div class="card" id="state"></div>
+    </div>
+    <div>
+      <h2>Cosa fa questo passo</h2>
+      <div class="card" id="explain"></div>
+    </div>
+  </div>
+
+  <h2>Cosa è appena successo</h2>
+  <div class="msg" id="msg">Scegli un repo per cominciare.</div>
+
+  <h2>Gioco libero</h2>
+  <div class="card">
+    <div class="row" id="pickRow"></div>
+    <div class="row">
+      <button class="primary" id="btnRun">Esegui il passo corrente</button>
+      <button id="btnApprove">Approva</button>
+      <button id="btnEditOk">Approva con modifiche valide</button>
+      <button id="btnEditBad">Approva con modifiche NON valide</button>
+      <button id="btnReject">Rifiuta</button>
+      <button id="btnReset">Ricomincia</button>
+    </div>
+    <div style="margin-top:8px">
+      <label class="chk"><input type="checkbox" id="setBad"> Il modello sbaglia la prima bozza (dimentica la descrizione inglese)</label>
+      <label class="chk"><input type="checkbox" id="setCrash"> Il processo si interrompe subito dopo aver aperto la PR</label>
+      <label class="chk"><input type="checkbox" id="setIdem" checked> Il passo "apri la PR" è sicuro da ripetere (controlla se la PR esiste già)</label>
+    </div>
+  </div>
+
+  <h2>Percorsi guidati</h2>
+  <div class="card">
+    <div class="tabs" id="tabs"></div>
+    <p id="scDesc" style="margin:0 0 4px"></p>
+    <ol class="steps" id="scSteps"></ol>
+  </div>
+
+  <h2>Registro</h2>
+  <div class="card"><ul class="log" id="log"></ul></div>
+</main>
+
+<script>
+/* ===================================================================
+   MODULO PURO: nessun DOM qui dentro. Questo è il pezzo che, se il
+   flusso ti convince, diventa il vero grafo LangGraph.
+   =================================================================== */
+const AGENTE = (() => {
+  const LIMITI = { maxFileElencati: 20, maxTentativi: 2 };
+
+  // Repo finti (con topic "portfolio" e senza portfolio.json)
+  const REPOS = {
+    'progetto-tesi': {
+      fileTotali: 18, readme: true, pkg: true,
+      draft: {
+        title: 'LLM Agent for EHR Querying',
+        description: {
+          it: 'Proof of concept della tesi magistrale: un agente LLM che risponde alle domande di un medico su un FSE simulato.',
+          en: "Master's thesis proof of concept: an LLM agent that answers a doctor's questions on a simulated health record."
+        },
+        technologies: ['TypeScript', 'LangGraph', 'Gemini', 'ChromaDB', 'FHIR']
+      }
+    },
+    'n8nworkflows': {
+      fileTotali: 412, readme: true, pkg: false,
+      draft: {
+        title: 'n8n AI Workflows',
+        description: {
+          it: 'Raccolta di workflow n8n open source che integrano le API di OpenAI, Anthropic e Gemini.',
+          en: 'Open-source collection of n8n workflows integrating the OpenAI, Anthropic and Gemini APIs.'
+        },
+        technologies: ['n8n', 'OpenAI', 'Anthropic', 'Gemini']
+      }
+    },
+    'repo-vuoto': { fileTotali: 1, readme: false, pkg: false, draft: null }
+  };
+
+  const clone = (x) => JSON.parse(JSON.stringify(x));
+
+  function initial(settings) {
+    return {
+      node: 'selezione', repo: null, explored: [], draft: null, errors: [],
+      attempts: 0, waiting: false, prCreated: false, prCount: 0, crashedOnce: false,
+      outcome: null, log: [],
+      settings: Object.assign({ badFirstDraft: false, crashOnPR: false, idempotentPR: true }, settings)
+    };
+  }
+
+  // Controllo della bozza (nel progetto vero sarà lo schema Zod)
+  function validate(d) {
+    const e = [];
+    if (!d || !d.title) e.push('manca il titolo');
+    if (!d || !d.description || !d.description.it) e.push('manca la descrizione in italiano');
+    if (!d || !d.description || !d.description.en) e.push('manca la descrizione in inglese');
+    if (!d || !Array.isArray(d.technologies) || d.technologies.length === 0) e.push('serve almeno una tecnologia');
+    return e;
+  }
+
+  const refuse = (s, why) => ({ state: s, ok: false, message: why });
+
+  function step(prev, a) {
+    const s = clone(prev);
+    const say = (m) => { s.log.push(m); return { state: s, ok: true, message: m }; };
+
+    if (a.type === 'RESET') return { state: initial(a.settings || s.settings), ok: true, message: 'Ricominciato da capo.' };
+    if (a.type === 'SET') { s.settings[a.key] = a.value; return say('Impostazione cambiata: ' + a.key + ' = ' + a.value); }
+
+    if (a.type === 'PICK') {
+      if (s.node !== 'selezione') return refuse(prev, 'Rifiutato: il lavoro su "' + (s.repo || '?') + '" è già in corso o concluso. Premi "Ricomincia" per sceglierne un altro.');
+      s.repo = a.repo; s.node = 'esplora';
+      return say('Scelto il repo "' + a.repo + '" (ha il topic portfolio, ma non ha ancora portfolio.json).');
+    }
+
+    if (a.type === 'APPROVE' || a.type === 'EDIT_OK' || a.type === 'EDIT_BAD' || a.type === 'REJECT') {
+      if (s.node !== 'approvazione' || !s.waiting)
+        return refuse(prev, 'Rifiutato: non c\'è niente da approvare adesso. Il grafo non è in pausa in attesa di una persona.');
+      if (a.type === 'REJECT') { s.waiting = false; s.outcome = 'Scartato dalla persona: nessuna PR aperta.'; s.node = 'fine'; return say('La persona ha rifiutato la bozza. Fine, nessuna PR.'); }
+      if (a.type === 'APPROVE') {
+        if (s.errors.length) return refuse(prev, 'Rifiutato: la bozza non è valida (' + s.errors.join('; ') + '). Va corretta prima di approvarla.');
+        s.waiting = false; s.node = 'pr';
+        return say('La persona ha approvato la bozza così com\'è. Il grafo riprende e passa all\'apertura della PR.');
+      }
+      if (a.type === 'EDIT_OK') {
+        s.draft.description.it += ' (rivisto a mano)';
+        if (!s.draft.technologies || !s.draft.technologies.length) s.draft.technologies = clone(REPOS[s.repo].draft.technologies);
+        s.errors = validate(s.draft);
+        if (s.errors.length) return say('Modifica applicata, ma la bozza resta non valida: ' + s.errors.join('; ') + '.');
+        s.waiting = false; s.node = 'pr';
+        return say('La persona ha ritoccato la descrizione italiana (e rimesso le tecnologie, se mancavano) e approvato. Il controllo passa, si apre la PR con la versione corretta.');
+      }
+      if (a.type === 'EDIT_BAD') {
+        s.draft.technologies = [];
+        s.errors = validate(s.draft);
+        return say('La persona ha svuotato l\'elenco delle tecnologie. Il controllo lo blocca: ' + s.errors.join('; ') + '. Il grafo resta in pausa.');
+      }
+    }
+
+    if (a.type === 'RUN') {
+      switch (s.node) {
+        case 'selezione':
+          return refuse(prev, 'Rifiutato: prima scegli un repo.');
+        case 'fine':
+          return refuse(prev, 'Rifiutato: il percorso è già concluso (' + s.outcome + '). Premi "Ricomincia".');
+        case 'esplora': {
+          const r = REPOS[s.repo];
+          s.explored = [];
+          s.explored.push(r.fileTotali > LIMITI.maxFileElencati
+            ? 'Elenco file: primi ' + LIMITI.maxFileElencati + ' di ' + r.fileTotali + ' (troncato)'
+            : 'Elenco file: ' + r.fileTotali + ' (tutti)');
+          s.explored.push(r.readme ? 'README.md letto' : 'README.md assente');
+          s.explored.push(r.pkg ? 'package.json letto' : 'package.json assente');
+          if (!r.readme && !r.pkg) {
+            s.outcome = 'Scartato: troppo poco materiale (nessun README né package.json). Il modello non è stato chiamato per scrivere la bozza.';
+            s.node = 'fine';
+            return say('Il repo è troppo povero per scrivere una bozza sensata: percorso chiuso senza chiamare il modello.');
+          }
+          s.node = 'bozza';
+          return say('Il modello ha esplorato il repo con il budget fissato (' + s.explored.join('; ') + ').');
+        }
+        case 'bozza': {
+          s.attempts += 1;
+          const d = clone(REPOS[s.repo].draft);
+          const sbaglia = s.settings.badFirstDraft && s.attempts === 1;
+          if (sbaglia) delete d.description.en;
+          s.draft = d;
+          const retry = s.errors.length ? ' Questa volta ha ricevuto anche gli errori del tentativo precedente (' + s.errors.join('; ') + ').' : '';
+          s.node = 'valida';
+          return say('Il modello ha scritto la bozza (tentativo ' + s.attempts + ' di ' + LIMITI.maxTentativi + ').' + retry);
+        }
+        case 'valida': {
+          s.errors = validate(s.draft);
+          if (!s.errors.length) { s.node = 'approvazione'; return say('Il controllo ha dato esito positivo: la bozza rispetta lo schema.'); }
+          if (s.attempts < LIMITI.maxTentativi) { s.node = 'bozza'; return say('Il controllo ha trovato errori (' + s.errors.join('; ') + '). Si torna al modello con l\'elenco degli errori.'); }
+          s.outcome = 'Scartato: la bozza non è valida dopo ' + LIMITI.maxTentativi + ' tentativi.';
+          s.node = 'fine';
+          return say('Ancora errori al secondo tentativo: ci si ferma, niente PR.');
+        }
+        case 'approvazione': {
+          if (s.waiting) return refuse(prev, 'Rifiutato: il grafo è già in pausa. Serve la decisione di una persona (approva, modifica o rifiuta).');
+          s.waiting = true;
+          return say('Il grafo si è fermato (interrupt) e ha salvato lo stato. Aspetta una persona: nessun effetto fuori dal grafo finora.');
+        }
+        case 'pr': {
+          const crea = !(s.settings.idempotentPR && s.prCreated);
+          let m;
+          if (crea) { s.prCount += 1; s.prCreated = true; m = 'Creata la PR #' + s.prCount + ' sul repo "' + s.repo + '".'; }
+          else m = 'La PR esiste già: la riuso, non ne creo un\'altra.';
+          if (s.settings.crashOnPR && !s.crashedOnce) {
+            s.crashedOnce = true;
+            return say(m + ' POI IL PROCESSO SI INTERROMPE. Quando riparte, il passo ricomincia dall\'inizio.');
+          }
+          s.outcome = s.prCount > 1 ? 'PR aperta, ma ATTENZIONE: ne sono state create ' + s.prCount + ' (duplicate).' : 'PR aperta.';
+          s.node = 'fine';
+          return say(m + ' Fine.');
+        }
+      }
+    }
+    return refuse(prev, 'Azione sconosciuta.');
+  }
+
+  return { initial, step, validate, REPOS, LIMITI };
+})();
+
+/* ===================================================================
+   PAGINA: sottile involucro attorno al modulo puro.
+   =================================================================== */
+const NODI = [
+  { id: 'selezione',    nome: 'Scegli repo',        code: 'selezionaRepo' },
+  { id: 'esplora',      nome: 'Leggi il repo',      code: 'esploraRepo' },
+  { id: 'bozza',        nome: 'Scrivi la bozza',    code: 'scriviBozza' },
+  { id: 'valida',       nome: 'Controlla la bozza', code: 'validaBozza' },
+  { id: 'approvazione', nome: 'Decide una persona', code: 'chiediApprovazione' },
+  { id: 'pr',           nome: 'Apri la PR',         code: 'apriPR' },
+  { id: 'fine',         nome: 'Fine',               code: '__end__' }
+];
+
+const SPIEGA = {
+  selezione: {
+    tipo: 'Nodo di codice (senza modello)',
+    testo: 'Cerca i repo col topic <code>portfolio</code> che non hanno ancora <code>portfolio.json</code> e ne prende uno. Non serve un LLM: è una funzione normale.',
+    lg: 'graph.addNode("selezionaRepo", (state) => ({ repo: scegli() }))\n// Un nodo = una funzione che riceve lo stato e restituisce solo ciò che cambia.'
+  },
+  esplora: {
+    tipo: 'Nodo con modello e strumenti (ciclo)',
+    testo: 'Il modello decide cosa leggere: elenco dei file, README, package.json. Ha un <b>budget</b>: elenco troncato a 20 file. Se non c\'è nulla da leggere il percorso si chiude qui, senza scrivere niente.',
+    lg: '.addNode("esploraRepo", llmConStrumenti)\n.addNode("tools", new ToolNode([elencaFile, leggiFile]))\n.addConditionalEdges("esploraRepo", haChiamatoUnTool, ["tools", "scriviBozza", "__end__"])\n// Arco condizionale: una funzione guarda lo stato e sceglie il prossimo nodo.'
+  },
+  bozza: {
+    tipo: 'Nodo con modello (output strutturato)',
+    testo: 'Il modello scrive il Manifest nella forma dello schema. Se è un secondo tentativo, riceve anche gli errori del controllo precedente.',
+    lg: 'const bozza = await model.withStructuredOutput(ManifestSchema).invoke(messaggi)\nreturn { draft: bozza, attempts: state.attempts + 1 }'
+  },
+  valida: {
+    tipo: 'Nodo di codice + arco condizionale',
+    testo: 'Controlla la bozza con lo schema (Zod). Valida: avanti. Non valida: torna al modello con gli errori, al massimo 2 tentativi, poi scarta. Il controllo è <b>codice</b>, non un altro modello: non sbaglia a caso.',
+    lg: '.addConditionalEdges("validaBozza", (s) =>\n  s.errors.length === 0 ? "chiediApprovazione"\n  : s.attempts < 2 ? "scriviBozza" : "__end__")'
+  },
+  approvazione: {
+    tipo: 'Nodo con interrupt (pausa umana)',
+    testo: 'Il grafo si ferma e salva lo stato. Una persona vede la bozza e decide. Questo nodo <b>non fa effetti fuori dal grafo</b>: quando si riprende, il nodo riparte dall\'inizio.',
+    lg: 'const decisione = interrupt({ bozza: state.draft })\n// ...più tardi, stessa esecuzione (thread_id):\napp.invoke(new Command({ resume: { tipo: "approva" } }), config)'
+  },
+  pr: {
+    tipo: 'Nodo con effetto sul mondo',
+    testo: 'Crea il ramo, aggiunge <code>portfolio.json</code>, apre la PR. Sta in un nodo <b>separato dopo l\'interrupt</b> perché i nodi ripartono dall\'inizio: se la PR fosse nello stesso nodo dell\'interrupt, verrebbe aperta di nuovo a ogni ripresa. In più il passo controlla se la PR esiste già (idempotente).',
+    lg: '.addNode("apriPR", async (s) => {\n  if (!s.prUrl) return { prUrl: await creaPR(s.draft) }\n  return {}   // già creata: non rifarla\n})'
+  },
+  fine: {
+    tipo: 'Fine del percorso',
+    testo: 'Il grafo ha finito: o con una PR aperta, o scartando il repo con un motivo chiaro. Nessun caso lascia il lavoro a metà in silenzio.',
+    lg: 'graph.addEdge("apriPR", "__end__")'
+  }
+};
+
+const SCENARI = [
+  { titolo: 'Percorso felice', settings: {},
+    desc: 'Tutto va bene: il modello scrive una bozza valida e la persona la approva. Guarda come lo stato si riempie a ogni passo, e come il grafo si ferma da solo in attesa della persona.',
+    steps: [
+      ['Scegli "progetto-tesi"', { type:'PICK', repo:'progetto-tesi' }], ['Esegui: leggi il repo', { type:'RUN' }],
+      ['Esegui: scrivi la bozza', { type:'RUN' }], ['Esegui: controlla la bozza', { type:'RUN' }],
+      ['Esegui: chiedi alla persona (pausa)', { type:'RUN' }], ['Approva', { type:'APPROVE' }], ['Esegui: apri la PR', { type:'RUN' }] ] },
+  { titolo: 'Il modello sbaglia', settings: { badFirstDraft: true },
+    desc: 'Il modello dimentica la descrizione in inglese. Guarda cosa fa il controllo: invece di mostrare una bozza rotta alla persona, rimanda il lavoro al modello con la lista degli errori. Al secondo tentativo è corretta.',
+    steps: [
+      ['Scegli "progetto-tesi"', { type:'PICK', repo:'progetto-tesi' }], ['Esegui: leggi il repo', { type:'RUN' }],
+      ['Esegui: scrivi la bozza (tentativo 1)', { type:'RUN' }], ['Esegui: controlla (trova l\'errore)', { type:'RUN' }],
+      ['Esegui: scrivi la bozza (tentativo 2)', { type:'RUN' }], ['Esegui: controlla (ora passa)', { type:'RUN' }],
+      ['Esegui: chiedi alla persona (pausa)', { type:'RUN' }], ['Approva', { type:'APPROVE' }], ['Esegui: apri la PR', { type:'RUN' }] ] },
+  { titolo: 'La persona corregge', settings: {},
+    desc: 'La persona non approva così com\'è. Prima fa una modifica sbagliata (svuota le tecnologie): il controllo la blocca e non si può nemmeno approvare. Poi la corregge e approva.',
+    steps: [
+      ['Scegli "progetto-tesi"', { type:'PICK', repo:'progetto-tesi' }], ['Esegui: leggi il repo', { type:'RUN' }],
+      ['Esegui: scrivi la bozza', { type:'RUN' }], ['Esegui: controlla la bozza', { type:'RUN' }], ['Esegui: chiedi alla persona (pausa)', { type:'RUN' }],
+      ['Modifica NON valida', { type:'EDIT_BAD' }], ['Prova ad approvare', { type:'APPROVE' }],
+      ['Modifica valida', { type:'EDIT_OK' }], ['Esegui: apri la PR', { type:'RUN' }] ] },
+  { titolo: 'Repo vuoto', settings: {},
+    desc: 'Un repo con il topic ma senza README né package.json. Il percorso si chiude subito, senza spendere una chiamata al modello per inventare una bozza.',
+    steps: [
+      ['Scegli "repo-vuoto"', { type:'PICK', repo:'repo-vuoto' }], ['Esegui: leggi il repo', { type:'RUN' }], ['Prova a continuare', { type:'RUN' }] ] },
+  { titolo: 'Repo enorme', settings: {},
+    desc: 'Un repo con 412 file (le raccolte di workflow). L\'esplorazione ha un budget: l\'elenco viene troncato ai primi 20, così costo e tempo restano limitati. Controlla la riga "troncato" nello stato.',
+    steps: [
+      ['Scegli "n8nworkflows"', { type:'PICK', repo:'n8nworkflows' }], ['Esegui: leggi il repo (troncato)', { type:'RUN' }],
+      ['Esegui: scrivi la bozza', { type:'RUN' }], ['Esegui: controlla la bozza', { type:'RUN' }] ] },
+  { titolo: 'Interruzione, PR sicura', settings: { crashOnPR: true, idempotentPR: true },
+    desc: 'Il processo si interrompe subito dopo aver creato la PR, poi riparte e rifa il passo dall\'inizio. Poiché il passo controlla se la PR esiste già, ne esiste una sola.',
+    steps: [
+      ['Scegli "progetto-tesi"', { type:'PICK', repo:'progetto-tesi' }], ['Esegui: leggi il repo', { type:'RUN' }],
+      ['Esegui: scrivi la bozza', { type:'RUN' }], ['Esegui: controlla la bozza', { type:'RUN' }], ['Esegui: chiedi alla persona (pausa)', { type:'RUN' }],
+      ['Approva', { type:'APPROVE' }], ['Esegui: apri la PR (si interrompe)', { type:'RUN' }], ['Esegui: riparti dall\'inizio del passo', { type:'RUN' }] ] },
+  { titolo: 'Interruzione, PR NON sicura', settings: { crashOnPR: true, idempotentPR: false },
+    desc: 'Stesso scenario, ma il passo non controlla se la PR esiste. Alla ripartenza ne crea una seconda. È il motivo per cui il passo "apri la PR" deve essere sicuro da ripetere.',
+    steps: [
+      ['Scegli "progetto-tesi"', { type:'PICK', repo:'progetto-tesi' }], ['Esegui: leggi il repo', { type:'RUN' }],
+      ['Esegui: scrivi la bozza', { type:'RUN' }], ['Esegui: controlla la bozza', { type:'RUN' }], ['Esegui: chiedi alla persona (pausa)', { type:'RUN' }],
+      ['Approva', { type:'APPROVE' }], ['Esegui: apri la PR (si interrompe)', { type:'RUN' }], ['Esegui: riparti dall\'inizio del passo', { type:'RUN' }] ] },
+  { titolo: 'Azioni vietate', settings: {},
+    desc: 'Cose che il grafo deve rifiutare: approvare quando non c\'è niente in attesa, andare avanti senza repo, cambiare repo a metà lavoro. Ogni pulsante qui è un tentativo che deve fallire con un messaggio chiaro.',
+    steps: [
+      ['Approva (non c\'è niente da approvare)', { type:'APPROVE' }], ['Esegui senza aver scelto un repo', { type:'RUN' }],
+      ['Scegli "progetto-tesi"', { type:'PICK', repo:'progetto-tesi' }], ['Scegli un altro repo a metà lavoro', { type:'PICK', repo:'n8nworkflows' }] ] }
+];
+
+let S = AGENTE.initial();
+let msg = { text: 'Scegli un repo per cominciare.', ok: true };
+let changed = [];
+let scIdx = null, scDone = 0;
+
+const $ = (id) => document.getElementById(id);
+const esc = (t) => String(t).replace(/[&<>]/g, (c) => ({ '&':'&amp;','<':'&lt;','>':'&gt;' }[c]));
+const CAMPI = ['node','repo','explored','draft','errors','attempts','waiting','prCount','outcome'];
+
+function dispatch(a) {
+  const before = S;
+  const r = AGENTE.step(S, a);
+  msg = { text: r.message, ok: r.ok };
+  if (r.ok) { changed = CAMPI.filter((k) => JSON.stringify(before[k]) !== JSON.stringify(r.state[k])); S = r.state; }
+  else changed = [];
+  render();
+  return r;
+}
+
+function hl(campo, html) { return changed.includes(campo) ? '<span class="changed">' + html + '</span>' : html; }
+
+function render() {
+  // Grafo
+  $('flow').innerHTML = NODI.map((n, i) =>
+    (i ? '<span class="arrow">→</span>' : '') +
+    '<div class="node' + (S.node === n.id ? ' on' : '') + '">' + n.nome + '<small>' + n.code + (S.node === n.id && S.waiting ? ' · in pausa' : '') + '</small></div>').join('');
+  $('flowNotes').innerHTML = 'Frecce condizionali: dopo "Leggi il repo" (materiale sufficiente? se no, fine); dopo "Controlla" (valida → persona, non valida → di nuovo la bozza, oppure fine dopo 2 tentativi); dopo "Decide una persona" (approva → PR, rifiuta → fine).';
+
+  // Stato
+  const d = S.draft;
+  const bozza = !d ? '<span class="muted">— nessuna —</span>' :
+    '<div><b>' + esc(d.title || '') + '</b></div>' +
+    '<div>IT: ' + (d.description && d.description.it ? esc(d.description.it) : '<span class="bad">— mancante —</span>') + '</div>' +
+    '<div>EN: ' + (d.description && d.description.en ? esc(d.description.en) : '<span class="bad">— mancante —</span>') + '</div>' +
+    '<div>Tecnologie: ' + (d.technologies && d.technologies.length ? esc(d.technologies.join(', ')) : '<span class="bad">— nessuna —</span>') + '</div>';
+  $('state').innerHTML = '<dl class="kv">' +
+    '<dt>Passo corrente</dt><dd>' + hl('node', esc(NODI.find((n) => n.id === S.node).nome)) + (S.waiting ? ' <b>(in pausa: serve una persona)</b>' : '') + '</dd>' +
+    '<dt>Repo</dt><dd>' + hl('repo', S.repo ? esc(S.repo) : '<span class="muted">—</span>') + '</dd>' +
+    '<dt>Materiale letto</dt><dd>' + hl('explored', S.explored.length ? S.explored.map(esc).join('<br>') : '<span class="muted">—</span>') + '</dd>' +
+    '<dt>Bozza</dt><dd>' + hl('draft', bozza) + '</dd>' +
+    '<dt>Errori del controllo</dt><dd>' + hl('errors', S.errors.length ? '<span class="bad">' + esc(S.errors.join('; ')) + '</span>' : '<span class="muted">nessuno</span>') + '</dd>' +
+    '<dt>Tentativi del modello</dt><dd>' + hl('attempts', S.attempts + ' di ' + AGENTE.LIMITI.maxTentativi) + '</dd>' +
+    '<dt>PR create</dt><dd>' + hl('prCount', S.prCount > 1 ? '<span class="bad">' + S.prCount + ' (duplicate!)</span>' : String(S.prCount)) + '</dd>' +
+    '<dt>Esito</dt><dd>' + hl('outcome', S.outcome ? (S.outcome.startsWith('PR aperta') && S.prCount <= 1 ? '<span class="good">' + esc(S.outcome) + '</span>' : esc(S.outcome)) : '<span class="muted">in corso</span>') + '</dd>' +
+    '</dl>';
+
+  // Spiegazione del passo
+  const sp = SPIEGA[S.node];
+  $('explain').innerHTML = '<div class="muted" style="font-size:13px">' + sp.tipo + '</div><p style="margin:6px 0">' + sp.testo + '</p><div class="muted" style="font-size:12px">In LangGraph:</div><pre>' + esc(sp.lg) + '</pre>';
+
+  // Messaggio
+  $('msg').className = 'msg' + (msg.ok ? '' : ' refused');
+  $('msg').innerHTML = esc(msg.text) + (changed.length ? '<span class="tag">cambiato: ' + changed.join(', ') + '</span>' : '');
+
+  // Registro
+  $('log').innerHTML = S.log.slice().reverse().map((l) => '<li>' + esc(l) + '</li>').join('') || '<li>vuoto</li>';
+
+  // Scenari
+  $('tabs').innerHTML = SCENARI.map((sc, i) => '<button class="' + (scIdx === i ? 'sel' : '') + '" data-sc="' + i + '">' + sc.titolo + '</button>').join('');
+  if (scIdx === null) { $('scDesc').textContent = 'Scegli un percorso: parte da uno stato pulito e ti guida un pulsante alla volta.'; $('scSteps').innerHTML = ''; }
+  else {
+    const sc = SCENARI[scIdx];
+    $('scDesc').textContent = sc.desc;
+    $('scSteps').innerHTML = sc.steps.map((st, i) =>
+      '<li><span class="n">' + (i + 1) + '.</span><button data-step="' + i + '"' + (i !== scDone ? ' disabled' : '') + ' class="' + (i === scDone ? 'primary' : '') + '">' + st[0] + '</button>' + (i < scDone ? '<span class="done">✓</span>' : '') + '</li>').join('') +
+      (scDone >= sc.steps.length ? '<li class="muted">Fine del percorso. Puoi continuare a giocare liberamente, o sceglierne un altro.</li>' : '');
+  }
+
+  $('setBad').checked = S.settings.badFirstDraft; $('setCrash').checked = S.settings.crashOnPR; $('setIdem').checked = S.settings.idempotentPR;
+}
+
+// Gioco libero
+$('pickRow').innerHTML = Object.keys(AGENTE.REPOS).map((r) => '<button data-pick="' + r + '">Scegli "' + r + '"</button>').join('');
+$('pickRow').onclick = (e) => { const r = e.target.dataset.pick; if (r) dispatch({ type: 'PICK', repo: r }); };
+$('btnRun').onclick = () => dispatch({ type: 'RUN' });
+$('btnApprove').onclick = () => dispatch({ type: 'APPROVE' });
+$('btnEditOk').onclick = () => dispatch({ type: 'EDIT_OK' });
+$('btnEditBad').onclick = () => dispatch({ type: 'EDIT_BAD' });
+$('btnReject').onclick = () => dispatch({ type: 'REJECT' });
+$('btnReset').onclick = () => { scIdx = null; changed = []; S = AGENTE.initial(S.settings); msg = { text: 'Ricominciato da capo (le impostazioni restano).', ok: true }; render(); };
+$('setBad').onchange = (e) => dispatch({ type: 'SET', key: 'badFirstDraft', value: e.target.checked });
+$('setCrash').onchange = (e) => dispatch({ type: 'SET', key: 'crashOnPR', value: e.target.checked });
+$('setIdem').onchange = (e) => dispatch({ type: 'SET', key: 'idempotentPR', value: e.target.checked });
+
+// Percorsi guidati
+$('tabs').onclick = (e) => {
+  const i = e.target.dataset.sc; if (i === undefined) return;
+  scIdx = Number(i); scDone = 0; changed = [];
+  S = AGENTE.initial(SCENARI[scIdx].settings);
+  msg = { text: 'Percorso "' + SCENARI[scIdx].titolo + '" avviato da uno stato pulito.', ok: true };
+  render();
+};
+$('scSteps').onclick = (e) => {
+  const i = e.target.dataset.step; if (i === undefined || Number(i) !== scDone) return;
+  scDone += 1;
+  dispatch(SCENARI[scIdx].steps[Number(i)][1]);
+};
+
+render();
+</script>
+</body>
+</html>

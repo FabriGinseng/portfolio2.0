@@ -1,0 +1,121 @@
+[
+  {
+    "id": "campania-in-salute",
+    "title": "Campania In Salute App",
+    "description": {
+      "it": "App completa per la gestione dei dati sanitari e degli appuntamenti, con un'interfaccia user-friendly, gestione sicura dei dati e integrazione perfetta con i fornitori di servizi sanitari.",
+      "en": "Full-featured health app for managing health data and appointments, with a user-friendly interface, secure data handling, and seamless integration with healthcare providers."
+    },
+    "technologies": [
+      "Xamarin Forms",
+      "C#",
+      "Node.js"
+    ],
+    "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/e1/81/53/e1815395-abd6-1281-c010-0bf256dba807/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/460x0w.webp",
+    "liveUrl": "https://apps.apple.com/it/app/campania-in-salute/id1526791777",
+    "order": 10
+  },
+  {
+    "id": "arpa",
+    "title": "ARPA",
+    "description": {
+      "it": "ARPA ha trasformato il processo di approvvigionamento per un'azienda tecnologica globale, rendendolo più efficiente e tracciabile.",
+      "en": "ARPA has transformed the procurement process for a global technology company, making it more efficient and traceable."
+    },
+    "technologies": [
+      "Vue js",
+      "Javascript",
+      "Vuetify",
+      "Pinia"
+    ],
+    "icon": "/img/arpa.png",
+    "order": 30
+  },
+  {
+    "id": "refit-rest-methods",
+    "title": "REFIT- REST METHODS NUGET PACKAGE",
+    "description": {
+      "it": "Una libreria .NET che semplifica le richieste HTTP fornendo un modo dichiarativo per definire client API REST utilizzando interfacce e attributi.",
+      "en": "A .NET library that simplifies HTTP requests by providing a declarative way to define REST API clients using interfaces and attributes."
+    },
+    "technologies": [
+      "C#",
+      ".NET",
+      "NuGet",
+      "Visual Studio App Center"
+    ],
+    "icon": "https://api.nuget.org/v3-flatcontainer/refitrestmethodspackage/1.1.6/icon",
+    "liveUrl": "https://www.nuget.org/packages/RefitRestMethodsPackage",
+    "repo": "FabriGinseng/RestMethodsRefit",
+    "order": 40
+  },
+  {
+    "id": "entropia-didattica",
+    "title": "Entropia didattica",
+    "description": {
+      "it": "Una nuova misura per la similarità tra mappe concettuali. Il lavoro di tesi svolto con il supervisore prof. Filippo Sciarrone. Il progetto si è proposto di trovare e descrivere, attraverso una piattaforma web, una nuova misura di similarità tra mappe concettuali.",
+      "en": "A new measure of similarity between concept maps. The thesis work carried out with supervisor prof. Filippo Sciarrone. The project set out to find and describe, through a web platform, a new measure of similarity between concept maps."
+    },
+    "technologies": [
+      "Vue.js",
+      "Chart.js",
+      "JavaScript",
+      "TypeScript"
+    ],
+    "icon": "/img/hcm.png",
+    "liveUrl": "https://entropy-henna.vercel.app/",
+    "repo": "FabriGinseng/EntropyProject",
+    "order": 50
+  },
+  {
+    "id": "old-portfolio",
+    "title": "Old Portfolio Website",
+    "description": {
+      "it": "Il mio precedente sito portfolio che mostra i miei progetti e competenze prima della versione attuale.",
+      "en": "My previous portfolio website showcasing my projects and skills before the current version."
+    },
+    "technologies": [
+      "Vuejs",
+      "CSS",
+      "ElementUI"
+    ],
+    "icon": "https://avatars.githubusercontent.com/u/28861456?v=4",
+    "liveUrl": "https://portfolio-e6pdxlbb7-fabriginseng.vercel.app/",
+    "repo": "FabriGinseng/portfolio",
+    "order": 60
+  },
+  {
+    "id": "quickqueuesystem",
+    "title": "QuickQueueSystem",
+    "description": {
+      "it": "Un sistema per gestire e ottimizzare le code in vari ambienti, migliorando l'esperienza del cliente e l'efficienza operativa.",
+      "en": "A system for managing and optimizing queues in various environments, enhancing customer experience and operational efficiency."
+    },
+    "technologies": [
+      "VueJs",
+      "Ionic",
+      "Node.js",
+      "PostgreSQL",
+      "Fastify"
+    ],
+    "icon": "https://kinsta.com/wp-content/uploads/2022/03/what-is-vue-3.png",
+    "order": 70
+  },
+  {
+    "id": "ecommerce-template",
+    "title": "E-commerce template",
+    "description": {
+      "it": "Piattaforma e-commerce moderna con gestione prodotti",
+      "en": "Modern e-commerce platform with product management"
+    },
+    "technologies": [
+      "Vue.js",
+      "Pinia",
+      "JavaScript"
+    ],
+    "icon": "https://kinsta.com/wp-content/uploads/2022/03/what-is-vue-3.png",
+    "liveUrl": "https://github.com/FabriGinseng/ecommerce",
+    "repo": "FabriGinseng/ecommerce",
+    "order": 80
+  }
+]

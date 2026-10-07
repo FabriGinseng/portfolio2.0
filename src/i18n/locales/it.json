@@ -61,41 +61,7 @@
     "title": "Progetti",
     "subtitle": "Cosa ho costruito",
     "viewProject": "Vedi Progetto",
-    "viewCode": "Vedi Codice",
-    "items": [
-      {
-        "title": "Campania In Salute App",
-        "description": "App completa per la gestione dei dati sanitari e degli appuntamenti, con un'interfaccia user-friendly, gestione sicura dei dati e integrazione perfetta con i fornitori di servizi sanitari."
-      },
-      {
-        "title": "LLM Agent for EHR Querying",
-        "description": "Proof of concept della tesi magistrale: un agente LLM che risponde alle domande di un medico su un Fascicolo Sanitario Elettronico simulato, scegliendo via tool calling tra interrogazioni FHIR strutturate e ricerca semantica (RAG) sui referti, con isolamento dei dati per paziente e metriche di latenza e token per la valutazione."
-      },
-      {
-        "title": "ARPA",
-        "description": "ARPA ha trasformato il processo di approvvigionamento per un'azienda tecnologica globale, rendendolo più efficiente e tracciabile."
-      },
-      {
-        "title": "REFIT- REST METHODS NUGET PACKAGE",
-        "description": "Una libreria .NET che semplifica le richieste HTTP fornendo un modo dichiarativo per definire client API REST utilizzando interfacce e attributi."
-      },
-      {
-        "title": "Entropia didattica: una nuova misura per la similarità tra mappe concettuali",
-        "description": "Il lavoro di tesi svolto con il supervisore prof. Filippo Sciarrone. Il progetto si è proposto di trovare e descrivere, attraverso una piattaforma web, una nuova misura di similarità tra mappe concettuali."
-      },
-      {
-        "title": "Vecchio Sito Portfolio",
-        "description": "Il mio precedente sito portfolio che mostra i miei progetti e competenze prima della versione attuale."
-      },
-      {
-        "title": "QuickQueueSystem",
-        "description": "Un sistema per gestire e ottimizzare le code in vari ambienti, migliorando l'esperienza del cliente e l'efficienza operativa."
-      },
-      {
-        "title": "Template E-commerce",
-        "description": "Piattaforma e-commerce moderna con gestione prodotti"
-      }
-    ]
+    "viewCode": "Vedi Codice"
   },
   "contact": {
     "title": "Contattami",
