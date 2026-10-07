@@ -16,26 +16,6 @@
     "order": 10
   },
   {
-    "id": "llm-agent-ehr",
-    "title": "LLM Agent for EHR Querying",
-    "description": {
-      "it": "Proof of concept della tesi magistrale: un agente LLM che risponde alle domande di un medico su un Fascicolo Sanitario Elettronico simulato, scegliendo via tool calling tra interrogazioni FHIR strutturate e ricerca semantica (RAG) sui referti, con isolamento dei dati per paziente e metriche di latenza e token per la valutazione.",
-      "en": "Master's thesis proof of concept: an LLM agent that answers a doctor's questions on a simulated electronic health record, choosing via tool calling between structured FHIR API queries and semantic search (RAG) over clinical reports, with per-patient data isolation and latency/token metrics for evaluation."
-    },
-    "technologies": [
-      "TypeScript",
-      "Node.js",
-      "LangGraph",
-      "Gemini",
-      "ChromaDB",
-      "FHIR"
-    ],
-    "icon": "https://avatars.githubusercontent.com/u/28861456?v=4",
-    "liveUrl": "https://github.com/FabriGinseng/progetto-tesi",
-    "repo": "FabriGinseng/progetto-tesi",
-    "order": 20
-  },
-  {
     "id": "arpa",
     "title": "ARPA",
     "description": {
