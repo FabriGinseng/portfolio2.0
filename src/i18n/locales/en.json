@@ -61,41 +61,7 @@
     "title": "Projects",
     "subtitle": "Things I've built",
     "viewProject": "View Project",
-    "viewCode": "View Code",
-    "items": [
-      {
-        "title": "Campania In Salute App",
-        "description": "Full-featured health app for managing health data and appointments, with a user-friendly interface, secure data handling, and seamless integration with healthcare providers."
-      },
-      {
-        "title": "LLM Agent for EHR Querying",
-        "description": "Master's thesis proof of concept: an LLM agent that answers a doctor's questions on a simulated electronic health record, choosing via tool calling between structured FHIR API queries and semantic search (RAG) over clinical reports, with per-patient data isolation and latency/token metrics for evaluation."
-      },
-      {
-        "title": "ARPA",
-        "description": "ARPA has transformed the procurement process for a global technology company, making it more efficient and traceable."
-      },
-      {
-        "title": "REFIT- REST METHODS NUGET PACKAGE",
-        "description": "A .NET library that simplifies HTTP requests by providing a declarative way to define REST API clients using interfaces and attributes."
-      },
-      {
-        "title": "Entropia didattica: una nuova misura per la similarità tra mappe concettuali",
-        "description": "The thesis work carried out with supervisor prof. Filippo Sciarrone. The project set out to find and describe, through a web platform, a new measure of similarity between concept maps."
-      },
-      {
-        "title": "Old Portfolio Website",
-        "description": "My previous portfolio website showcasing my projects and skills before the current version."
-      },
-      {
-        "title": "QuickQueueSystem",
-        "description": "A system for managing and optimizing queues in various environments, enhancing customer experience and operational efficiency."
-      },
-      {
-        "title": "E-commerce template",
-        "description": "Modern e-commerce platform with product management"
-      }
-    ]
+    "viewCode": "View Code"
   },
   "contact": {
     "title": "Get In Touch",

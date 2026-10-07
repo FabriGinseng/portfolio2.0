@@ -36,3 +36,6 @@ lerna-debug.log*
 # Documentation (optional - uncomment to exclude)
 # *.md
 # !README.md
+
+# generato dal sync dei progetti da GitHub
+src/data/projects.synced.json
