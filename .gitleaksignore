@@ -1,0 +1,3 @@
+# Falsi positivi noti. Chiave pubblicabile di logo.dev (pk_...): pensata per stare nell'URL delle immagini lato browser, non è un segreto.
+25430fba370ffa93e8670ba3c2f9cc781811c431:src/components/Experience.vue:generic-api-key:27
+0d2fbb29edbae8978f5515b1348c8451abc65c5c:src/components/Experience.vue:generic-api-key:57

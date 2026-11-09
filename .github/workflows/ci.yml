@@ -1,0 +1,38 @@
+# CI di riferimento per un repo Node con package-lock.json: controlla ogni PR e ogni push su main.
+# Esegue solo gli script che il repo ha (--if-present): lint, typecheck, test, build. Non fa deploy e non usa segreti.
+# Copiato in <repo>/.github/workflows/ci.yml; la versione di Node è quella di `node-version`: cambiala se il repo ne usa un'altra.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: read # gitleaks-action elenca i commit della PR
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint --if-present
+      - run: npm run typecheck --if-present
+      - run: npm test --if-present
+      - run: npm run build --if-present
+
+  segreti:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # tutta la storia: con un solo commit gitleaks non vede i segreti vecchi
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
