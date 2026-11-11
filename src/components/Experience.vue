@@ -14,13 +14,22 @@
             vector-effect="non-scaling-stroke"
           />
         </svg>
-        <div aria-hidden="true" class="river absolute inset-y-0 left-0 w-8 bg-[var(--s-cyan)] md:hidden" />
+        <svg aria-hidden="true" class="river absolute inset-0 h-full w-full md:hidden" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <path
+            d="M10 0 C10 10 15 12 15 25 C15 38 8 40 8 55 C8 70 14 72 14 85 C14 92 11 95 11 100"
+            fill="none"
+            stroke="var(--s-cyan)"
+            stroke-width="26"
+            stroke-linecap="round"
+            vector-effect="non-scaling-stroke"
+          />
+        </svg>
         <ol class="relative">
           <li
             v-for="(item, n) in experiences"
             :key="item.company"
             data-reveal
-            class="exp-row grid gap-4 py-7 max-md:pl-14 md:grid-cols-2 md:py-14"
+            class="exp-row grid gap-4 py-7 max-md:pl-[4.75rem] md:grid-cols-2 md:py-14"
           >
             <div class="md:max-w-[34rem]" :class="n % 2 ? 'md:col-start-2 md:justify-self-end' : 'md:justify-self-start'">
               <h3 class="line-mask font-display text-[clamp(2rem,3.4vw,2.5rem)] font-bold leading-[1.05] tracking-[-0.03em]"><span>{{ item.company }}</span></h3>

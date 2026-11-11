@@ -485,24 +485,39 @@
   .book-dialog[open] {
     animation: book-pull 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
+  /* Telefono: la pagina in alto si ribalta attorno al suo bordo inferiore; il testo compare quando si è aperta. */
+  .book {
+    perspective: 2400px;
+  }
+  .page-l {
+    transform-style: preserve-3d;
+    transform-origin: bottom center;
+    animation: page-open-v 1.1s cubic-bezier(0.65, 0, 0.35, 1) 0.45s both;
+  }
+  .page-r {
+    animation: fade-up 0.5s ease 0.9s both;
+  }
+  .face-in {
+    backface-visibility: hidden;
+  }
+  .face-cover {
+    display: flex;
+    position: absolute;
+    inset: 0;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+  }
+  /* Da md in su: la pagina sinistra gira attorno al dorso centrale. */
   @media (min-width: 768px) {
-    .book {
-      perspective: 2400px;
-    }
     .page-l {
-      transform-style: preserve-3d;
       transform-origin: right center;
-      animation: page-open 1.1s cubic-bezier(0.65, 0, 0.35, 1) 0.45s both;
+      animation-name: page-open;
     }
-    .face-in {
-      backface-visibility: hidden;
+    .page-r {
+      animation: none;
     }
     .face-cover {
-      display: flex;
-      position: absolute;
-      inset: 0;
       transform: rotateY(180deg);
-      backface-visibility: hidden;
     }
   }
   /* Il fiume si stende dall'alto mentre si scorre, dove il browser lega l'animazione allo scroll. */
@@ -517,6 +532,10 @@
 @keyframes book-pull {
   from { transform: translate(var(--dx, 0), var(--dy, 0)) scale(0.12, 0.6); opacity: 0; }
   to { transform: none; opacity: 1; }
+}
+@keyframes page-open-v {
+  from { transform: rotateX(-180deg); }
+  to { transform: none; }
 }
 @keyframes page-open {
   from { transform: rotateY(180deg); }
