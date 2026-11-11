@@ -46,6 +46,7 @@ const marks = [
   ['PWA', 'var(--s-pink)'],
   ['Node.js', 'var(--s-orange)'],
   ['My Book Club', 'var(--s-blue)'],
+  ['second brain', 'var(--s-green)'],
 ] as const
 
 const parts = computed(() => {
