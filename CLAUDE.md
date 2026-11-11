@@ -12,7 +12,7 @@ Sito personale di Antonio Fabrizio Fiume (Vue 3, Vite, Tailwind 4, TypeScript), 
 - Lavoro grafico: usa sempre insieme le skill `design-taste-frontend` e `frontend-design`; tema chiaro e scuro, ogni testo visibile in italiano e inglese (`src/i18n/locales/`), `prefers-reduced-motion` rispettato, focus visibile.
 - Regole di stile (le misura `design-taste-frontend/scripts/inspect.mjs`): niente righe sottili, gradienti, ombre a riposo, monospace, etichette in maiuscolo, icone in riquadri; titoli su due righe al massimo. Palette e font stanno in `src/style.css`.
 - `Projects.vue` legge solo `projects` da `@/data/projects`. Il Progetto con `order` più basso è quello in primo piano (campo `image` opzionale).
-- Nessuna dipendenza nuova senza chiedere. `radix-vue`, `pinia`, `class-variance-authority`, `@vueuse/core` oggi non sono usate.
+- Nessuna dipendenza nuova senza chiedere.
 - Test: `npm test`. Build locale: `SKIP_SYNC=1 npm run build` (senza, `prebuild` chiama l'API di GitHub). Prima di dire «fatto» esegui entrambi e, per la grafica, `inspect.mjs` sulla build (`npx vite preview`).
 - Vercel pubblica da `main`: merge, push e deploy solo dopo il sì del proprietario.
 - Non committare `.env`; `.taste-skill/` e `projects.synced.json` sono ignorati da git.
