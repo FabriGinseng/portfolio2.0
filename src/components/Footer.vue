@@ -1,6 +1,12 @@
 <template>
   <footer id="contact" data-field class="field relative flex min-h-[80dvh] flex-col justify-between overflow-hidden" style="background: var(--f-foot); color: var(--f-ink)">
-    <div class="frame mx-auto w-full max-w-[110rem] pt-20 md:pt-28">
+    <!-- Il nome ripetuto dietro il contatto, fermo. -->
+    <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 overflow-hidden">
+      <div class="river-text flex w-max whitespace-nowrap font-display text-[min(30vw,24rem)] font-extrabold leading-[0.9] tracking-[-0.05em]">
+        <span>Fiume Fiume Fiume Fiume Fiume Fiume</span>
+      </div>
+    </div>
+    <div class="frame relative mx-auto w-full max-w-[110rem] pt-20 md:pt-28">
       <h2 data-reveal class="max-w-[28ch] font-display text-[clamp(1.5rem,3vw,2.5rem)] font-semibold leading-tight">
         {{ t('contact.prompt1') }} {{ t('contact.prompt2') }}
       </h2>
@@ -16,12 +22,10 @@
     </div>
 
     <div>
-      <p class="frame mx-auto mt-16 flex max-w-[110rem] flex-col gap-2 text-sm md:flex-row md:justify-between">
+      <p class="frame relative mx-auto mt-16 flex max-w-[110rem] flex-col gap-2 text-sm md:flex-row md:justify-between">
         <span>© {{ year }} Antonio Fabrizio Fiume. {{ t('footer.rights') }}</span>
         <span class="max-w-[60ch] md:text-right">{{ t('footer.credits') }}</span>
       </p>
-      <!-- Il nome torna a tutta larghezza, tagliato dal bordo inferiore. -->
-      <p aria-hidden="true" data-letters class="mt-6 translate-y-[22%] max-md:mb-16 whitespace-nowrap pl-3 font-display text-[min(30vw,28rem)] font-extrabold leading-[0.8] tracking-[-0.05em] md:pl-6"><span v-for="(c, i) in [...'Fiume']" :key="i" class="letter" :style="{ '--i': i }">{{ c }}</span></p>
     </div>
   </footer>
 </template>

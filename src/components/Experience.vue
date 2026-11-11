@@ -3,22 +3,35 @@
     <div class="frame mx-auto max-w-[110rem] py-20 md:py-32">
       <h2 class="text-title font-display font-bold" data-reveal>{{ t('experience.title') }}</h2>
 
-      <ol class="mt-6 md:mt-8">
-        <li
-          v-for="item in experiences"
-          :key="item.company"
-          data-reveal
-          class="exp-row grid gap-4 py-7 md:grid-cols-[5fr_7fr] md:gap-x-16 md:py-9"
-        >
-          <div>
-            <h3 class="line-mask font-display text-[clamp(2rem,3.4vw,2.5rem)] font-bold leading-[1.05] tracking-[-0.03em]"><span>{{ item.company }}</span></h3>
-            <p class="mt-2 text-lg"><span class="font-semibold">{{ item.position }}</span> <span class="whitespace-nowrap">· {{ item.period }}</span></p>
-          </div>
-          <ul class="max-w-[68ch] space-y-3 text-[1.0625rem] leading-[1.5] md:text-lg">
-            <li v-for="(line, k) in bullets(item.description)" :key="line" class="exp-bullet" :style="{ '--i': k }">{{ line }}</li>
-          </ul>
-        </li>
-      </ol>
+      <!-- Il fiume scende dalla sorgente (il primo lavoro) fino a oggi; i testi stanno sulla riva opposta alla curva. -->
+      <div class="river-wrap relative mt-10 md:mt-14">
+        <svg aria-hidden="true" class="river absolute inset-0 h-full w-full max-md:hidden" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <path
+            d="M72 0 C72 12 28 6 28 33 C28 60 72 40 72 66 C72 88 72 90 72 100"
+            fill="none"
+            stroke="var(--s-cyan)"
+            stroke-width="64"
+            vector-effect="non-scaling-stroke"
+          />
+        </svg>
+        <div aria-hidden="true" class="river absolute inset-y-0 left-0 w-8 bg-[var(--s-cyan)] md:hidden" />
+        <ol class="relative">
+          <li
+            v-for="(item, n) in experiences"
+            :key="item.company"
+            data-reveal
+            class="exp-row grid gap-4 py-7 max-md:pl-14 md:grid-cols-2 md:py-14"
+          >
+            <div class="md:max-w-[34rem]" :class="n % 2 ? 'md:col-start-2 md:justify-self-end' : 'md:justify-self-start'">
+              <h3 class="line-mask font-display text-[clamp(2rem,3.4vw,2.5rem)] font-bold leading-[1.05] tracking-[-0.03em]"><span>{{ item.company }}</span></h3>
+              <p class="mt-2 text-lg"><span class="font-semibold">{{ item.position }}</span> <span class="whitespace-nowrap">· {{ item.period }}</span></p>
+              <ul class="mt-4 space-y-3 text-[1.0625rem] leading-[1.5] md:text-lg">
+                <li v-for="(line, k) in bullets(item.description)" :key="line" class="exp-bullet" :style="{ '--i': k }">{{ line }}</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+      </div>
 
       <div class="mt-16 grid gap-12 md:mt-24 md:grid-cols-[5fr_7fr] md:gap-x-16">
         <figure data-reveal class="m-0 overflow-hidden max-md:order-2 md:self-stretch">
@@ -66,8 +79,8 @@ const bullets = (key: string) =>
   t(key).replace(/^-\s*/, '').split(/\s+-\s+/).map((s) => s.trim()).filter(Boolean)
 
 const experiences = computed(() => [
-  { position: 'Senior Frontend Developer', company: 'Sorint .Lab', period: '2023 - ' + t('experience.present'), description: 'experience.sorint_description' },
-  { position: 'Full Stack Developer', company: 'Gesan srl', period: '2018 - 2023', description: 'experience.gesan_description' },
   { position: 'Junior Software Developer', company: 'AK-12 srl', period: '2017 - 2018', description: 'experience.ak12_description' },
+  { position: 'Full Stack Developer', company: 'Gesan srl', period: '2018 - 2023', description: 'experience.gesan_description' },
+  { position: 'Senior Frontend Developer', company: 'Sorint .Lab', period: '2023 - ' + t('experience.present'), description: 'experience.sorint_description' },
 ])
 </script>

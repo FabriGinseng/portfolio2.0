@@ -214,10 +214,6 @@
 .spine {
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.spine-card {
-  opacity: 0;
-  transform: translateY(8px);
-}
 @media (min-width: 768px) {
   .spine {
     writing-mode: vertical-rl;
@@ -229,19 +225,6 @@
   .group:hover > .spine,
   .group:focus-within > .spine {
     transform: translateY(-10px);
-  }
-  .group:hover > .spine-card,
-  .group:focus-within > .spine-card {
-    opacity: 1;
-    transform: none;
-    pointer-events: auto;
-  }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .spine-card {
-    transition:
-      opacity 0.25s ease,
-      transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   }
 }
 
@@ -345,25 +328,11 @@
     transition: opacity 0.3s ease;
   }
 
-  /* Footer: le lettere salgono una a una. */
-  .js [data-letters] .letter {
-    display: inline-block;
-    transform: translateY(115%);
-    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--i) * 90ms);
-  }
-  .js [data-letters].is-in .letter {
-    transform: none;
-  }
-
   /* Dorsi: oscillano una volta prima che si apra la scheda. */
   @media (min-width: 768px) {
     .group:hover > .spine,
     .group:focus-within > .spine {
       animation: wobble 0.7s ease-out;
-    }
-    .group:hover > .spine-card,
-    .group:focus-within > .spine-card {
-      transition-delay: 0.25s;
     }
   }
 
@@ -502,4 +471,58 @@
 @keyframes drift {
   from { transform: scale(1.04) translateX(-1.5%); }
   to { transform: scale(1.12) translateX(1.5%); }
+}
+
+/* Footer: la scritta del fiume sta ferma dietro il contatto, tinta appena più scura del fondo. */
+.river-text {
+  color: rgb(20 20 26 / 0.14);
+}
+/* Libro: il dorso cliccato cresce fino al centro, poi la copertina si apre attorno al dorso e mostra l'interno. */
+.face-cover {
+  display: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .book-dialog[open] {
+    animation: book-pull 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @media (min-width: 768px) {
+    .book {
+      perspective: 2400px;
+    }
+    .page-l {
+      transform-style: preserve-3d;
+      transform-origin: right center;
+      animation: page-open 1.1s cubic-bezier(0.65, 0, 0.35, 1) 0.45s both;
+    }
+    .face-in {
+      backface-visibility: hidden;
+    }
+    .face-cover {
+      display: flex;
+      position: absolute;
+      inset: 0;
+      transform: rotateY(180deg);
+      backface-visibility: hidden;
+    }
+  }
+  /* Il fiume si stende dall'alto mentre si scorre, dove il browser lega l'animazione allo scroll. */
+  @supports (animation-timeline: view()) {
+    .river {
+      animation: river-flow linear both;
+      animation-timeline: view();
+      animation-range: cover 5% cover 60%;
+    }
+  }
+}
+@keyframes book-pull {
+  from { transform: translate(var(--dx, 0), var(--dy, 0)) scale(0.12, 0.6); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+@keyframes page-open {
+  from { transform: rotateY(180deg); }
+  to { transform: none; }
+}
+@keyframes river-flow {
+  from { clip-path: inset(0 0 100% 0); }
+  to { clip-path: inset(0); }
 }
