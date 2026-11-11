@@ -102,15 +102,24 @@
   color: #1c1c1c;
 }
 
+.bottom-bar.is-hidden {
+  transform: translateY(100%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .bottom-bar {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
 /* Dorsi: ogni progetto è un libro sullo scaffale. */
 .spine {
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
+.spine {
+  writing-mode: vertical-rl;
+  text-align: start;
+}
 @media (min-width: 768px) {
-  .spine {
-    writing-mode: vertical-rl;
-    text-align: start;
-  }
   .spine:hover,
   .spine:focus-visible {
     transform: translateY(-14px);

@@ -40,25 +40,26 @@
         <h3 class="font-display text-2xl font-bold tracking-tight">{{ t('projects.subtitle') }}</h3>
         <p class="text-muted">{{ t('projects.shelf') }}</p>
       </div>
-      <ul class="mt-10 flex flex-wrap items-end gap-[6px] md:flex-nowrap md:h-[28rem]">
+      <!-- Telefono: lo scaffale scorre di lato (un dorso per libro, il successivo spunta dal bordo); da md in su sta tutto in vista. -->
+      <ul class="-mx-5 mt-10 flex h-[22rem] snap-x snap-mandatory items-end gap-[6px] overflow-x-auto scroll-px-5 px-5 pb-2 md:mx-0 md:h-[28rem] md:snap-none md:overflow-visible md:px-0 md:pb-0">
         <li
           v-for="(project, i) in shelf"
           :key="project.id"
           data-reveal
           :style="{ '--d': `${i * 60}ms` }"
-          class="w-full md:h-full md:w-auto md:min-w-0 md:flex-1 md:basis-0 md:max-w-28"
+          class="h-full w-[5.2rem] shrink-0 snap-start md:w-auto md:min-w-0 md:max-w-28 md:flex-1 md:shrink md:basis-0"
         >
           <component
             :is="project.liveUrl ? 'a' : 'div'"
             :href="project.liveUrl"
             :target="project.liveUrl ? '_blank' : undefined"
             :rel="project.liveUrl ? 'noopener noreferrer' : undefined"
-            class="spine flex h-full items-baseline gap-3 overflow-hidden px-4 py-3 text-[#1c1c1c] md:block md:px-3 md:py-5"
+            class="spine block h-full overflow-hidden px-3 py-5 text-[#1c1c1c]"
             :style="{ backgroundColor: colors[i % colors.length] }"
             :aria-label="`${project.title}: ${project.description[lang]}`"
           >
-            <span class="font-bold md:block md:whitespace-nowrap">{{ project.title }}</span>
-            <span class="font-medium md:block md:whitespace-nowrap">{{ project.technologies[0] }}</span>
+            <span class="block whitespace-nowrap font-bold">{{ project.title }}</span>
+            <span class="block whitespace-nowrap font-medium">{{ project.technologies[0] }}</span>
           </component>
         </li>
       </ul>

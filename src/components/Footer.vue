@@ -24,7 +24,7 @@
         <span class="max-w-[60ch] md:text-right">{{ t('footer.credits') }}</span>
       </p>
       <!-- Il nome torna a tutta larghezza, tagliato dal bordo inferiore. -->
-      <p aria-hidden="true" class="mt-6 translate-y-[22%] whitespace-nowrap pl-3 font-display text-[min(30vw,28rem)] font-extrabold leading-[0.8] tracking-[-0.05em] md:pl-6">Fiume</p>
+      <p aria-hidden="true" class="mt-6 translate-y-[22%] max-md:mb-16 whitespace-nowrap pl-3 font-display text-[min(30vw,28rem)] font-extrabold leading-[0.8] tracking-[-0.05em] md:pl-6">Fiume</p>
     </div>
   </footer>
 </template>

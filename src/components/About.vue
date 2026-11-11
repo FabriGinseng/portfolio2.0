@@ -4,16 +4,20 @@
     <div class="grid gap-12 md:grid-cols-[3fr_1fr] md:gap-16">
       <p
         data-reveal
-        class="text-[clamp(1.125rem,1.7vw,1.5rem)] leading-[1.3] md:columns-2 md:gap-12 md:text-justify md:hyphens-auto"
+        class="text-[1.0625rem] leading-[1.5] md:text-[clamp(1.125rem,1.7vw,1.5rem)] md:leading-[1.3] md:columns-2 md:gap-12 md:text-justify md:hyphens-auto"
         :lang="locale"
       >
-        <template v-for="(part, i) in parts" :key="i">
-          <mark v-if="part.mark" class="mark" :style="{ backgroundColor: part.color }">{{ part.text }}</mark>
-          <template v-else>{{ part.text }}</template>
-        </template>
+        <!-- Sul telefono il testo va a capo per paragrafi e il primo è più grande; da md in su scorre come un'unica colonna. -->
+        <span v-for="(para, k) in paragraphs" :key="k" :class="k === 0 ? 'max-md:mb-6 max-md:block max-md:text-[1.5rem] max-md:leading-[1.25]' : 'max-md:mb-5 max-md:block'">
+          <template v-for="(part, i) in para" :key="i">
+            <mark v-if="part.mark" class="mark" :style="{ backgroundColor: part.color }">{{ part.text }}</mark>
+            <template v-else>{{ part.text }}</template>
+          </template>
+          {{ ' ' }}
+        </span>
         <a
           href="#contact"
-          class="mt-8 inline-block bg-accent px-3 py-2 font-medium text-on-accent transition-transform hover:-translate-y-0.5"
+          class="mt-8 inline-flex min-h-12 items-center bg-accent px-4 py-2 font-medium text-on-accent max-md:w-full transition-transform hover:-translate-y-0.5"
         >
           {{ t('about.closing') }}
         </a>
@@ -49,24 +53,32 @@ const marks = [
   ['second brain', 'var(--s-green)'],
 ] as const
 
-const parts = computed(() => {
-  let rest = t('about.description')
-  const out: { text: string; mark: boolean; color?: string }[] = []
-  // Evidenzia la prima occorrenza di ogni parola, nell'ordine in cui compaiono nel testo.
-  const hits = marks
-    .map(([word, color]) => ({ word, color, at: rest.indexOf(word) }))
-    .filter((h) => h.at >= 0)
-    .sort((a, b) => a.at - b.at)
-  let offset = 0
-  for (const h of hits) {
-    const at = h.at - offset
-    if (at < 0) continue
-    if (at > 0) out.push({ text: rest.slice(0, at), mark: false })
-    out.push({ text: h.word, mark: true, color: h.color })
-    rest = rest.slice(at + h.word.length)
-    offset = h.at + h.word.length
+// Il testo è un'unica stringa i18n: lo spezzo ogni due frasi; ogni parola evidenziata vale solo alla prima occorrenza.
+const paragraphs = computed(() => {
+  const sentences = t('about.description').split(/(?<=[.!?])\s+/)
+  const used = new Set<string>()
+  const out: { text: string; mark: boolean; color?: string }[][] = []
+  for (let n = 0; n < sentences.length; n += 2) {
+    let rest = sentences.slice(n, n + 2).join(' ')
+    const hits = marks
+      .filter(([word]) => !used.has(word))
+      .map(([word, color]) => ({ word, color, at: rest.indexOf(word) }))
+      .filter((h) => h.at >= 0)
+      .sort((a, b) => a.at - b.at)
+    const para: { text: string; mark: boolean; color?: string }[] = []
+    let offset = 0
+    for (const h of hits) {
+      const at = h.at - offset
+      if (at < 0) continue
+      if (at > 0) para.push({ text: rest.slice(0, at), mark: false })
+      para.push({ text: h.word, mark: true, color: h.color })
+      used.add(h.word)
+      rest = rest.slice(at + h.word.length)
+      offset = h.at + h.word.length
+    }
+    para.push({ text: rest, mark: false })
+    out.push(para)
   }
-  out.push({ text: rest + ' ', mark: false })
   return out
 })
 </script>
