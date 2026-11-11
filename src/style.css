@@ -115,11 +115,11 @@
 .spine {
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.spine {
-  writing-mode: vertical-rl;
-  text-align: start;
-}
 @media (min-width: 768px) {
+  .spine {
+    writing-mode: vertical-rl;
+    text-align: start;
+  }
   .spine:hover,
   .spine:focus-visible {
     transform: translateY(-14px);
@@ -157,6 +157,9 @@
     animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both;
   }
 
+}
+/* Lo zoom continuo solo da md in su: sul telefono pesa sullo scorrimento. */
+@media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
   .drift {
     animation: drift 24s ease-in-out infinite alternate;
   }

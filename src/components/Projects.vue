@@ -40,26 +40,24 @@
         <h3 class="font-display text-2xl font-bold tracking-tight">{{ t('projects.subtitle') }}</h3>
         <p class="text-muted">{{ t('projects.shelf') }}</p>
       </div>
-      <!-- Telefono: lo scaffale scorre di lato (un dorso per libro, il successivo spunta dal bordo); da md in su sta tutto in vista. -->
-      <ul class="-mx-5 mt-10 flex h-[22rem] snap-x snap-mandatory items-end gap-[6px] overflow-x-auto scroll-px-5 px-5 pb-2 md:mx-0 md:h-[28rem] md:snap-none md:overflow-visible md:px-0 md:pb-0">
+      <!-- Telefono: una pila di libri, una barra per progetto; da md in su i dorsi stanno in piedi sullo scaffale. -->
+      <ul data-reveal class="mt-10 flex flex-col gap-[6px] md:h-[28rem] md:flex-row md:items-end">
         <li
           v-for="(project, i) in shelf"
           :key="project.id"
-          data-reveal
-          :style="{ '--d': `${i * 60}ms` }"
-          class="h-full w-[5.2rem] shrink-0 snap-start md:w-auto md:min-w-0 md:max-w-28 md:flex-1 md:shrink md:basis-0"
+          class="md:h-full md:min-w-0 md:max-w-28 md:flex-1 md:basis-0"
         >
           <component
             :is="project.liveUrl ? 'a' : 'div'"
             :href="project.liveUrl"
             :target="project.liveUrl ? '_blank' : undefined"
             :rel="project.liveUrl ? 'noopener noreferrer' : undefined"
-            class="spine block h-full overflow-hidden px-3 py-5 text-[#1c1c1c]"
+            class="spine flex min-h-14 items-baseline justify-between gap-4 overflow-hidden px-5 py-4 text-[#1c1c1c] md:block md:h-full md:px-3 md:py-5"
             :style="{ backgroundColor: colors[i % colors.length] }"
             :aria-label="`${project.title}: ${project.description[lang]}`"
           >
-            <span class="block whitespace-nowrap font-bold">{{ project.title }}</span>
-            <span class="block whitespace-nowrap font-medium">{{ project.technologies[0] }}</span>
+            <span class="block min-w-0 whitespace-nowrap font-bold max-md:truncate">{{ project.title }}</span>
+            <span class="block whitespace-nowrap font-medium max-md:shrink-0">{{ project.technologies[0] }}</span>
           </component>
         </li>
       </ul>
