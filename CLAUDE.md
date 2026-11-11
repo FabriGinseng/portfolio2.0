@@ -16,3 +16,4 @@ Sito personale di Antonio Fabrizio Fiume (Vue 3, Vite, Tailwind 4, TypeScript), 
 - Test: `npm test`. Build locale: `SKIP_SYNC=1 npm run build` (senza, `prebuild` chiama l'API di GitHub). Prima di dire «fatto» esegui entrambi e, per la grafica, `inspect.mjs` sulla build (`npx vite preview`).
 - Vercel pubblica da `main`: merge, push e deploy solo dopo il sì del proprietario.
 - Non committare `.env`; `.taste-skill/` e `projects.synced.json` sono ignorati da git.
+- Il sito e `~/second-brain/memory/about-me.md` raccontano le stesse cose: se cambia uno (nuovo progetto, ruolo, titolo), aggiorna anche l'altro.
