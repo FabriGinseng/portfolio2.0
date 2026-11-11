@@ -15,7 +15,7 @@
     "greeting": "Ciao, sono",
     "name": "Antonio Fabrizio Fiume",
     "title": "Sviluppatore Full Stack",
-    "description": "Appassionato nel creare soluzioni eleganti a problemi complessi",
+    "description": "Sviluppo app Vue e Node per salute e lettura, già in produzione.",
     "cta": "Vedi i Miei Lavori",
     "cv": "Scarica il CV"
   },
@@ -25,7 +25,7 @@
     "description": "Ciao! Sono Fabrizio, sviluppatore Full-Stack con una passione particolare per il Front-End e il mobile development. Ho avuto la fortuna di lavorare a diversi progetti ambiziosi, tra cui “Campania in Salute”, un’app che permette ai cittadini di gestire la propria salute direttamente da casa: dalla progettazione allo sviluppo, ho seguito il progetto in ogni fase, ed è uno dei lavori di cui vado più fiero. Adoro lavorare con Vue.js, che considero veloce e versatile, e ho esperienza nello sviluppo di web app con Ionic + Vue, così come nell’uso di Flask + Python (per esempio per la creazione di un software di stampa per ESC/POS). Negli ultimi anni mi sto specializzando in migrazioni di progetti legacy, con soluzioni moderne come PWA personalizzate e completamente responsive. Sono sempre curioso di imparare: ho esplorato il mondo Docker e diverse tecnologie DevOps per ampliare il mio background, senza trascurare il backend con Node.js. In poche parole: amo costruire, innovare e crescere, affrontando ogni nuova sfida con entusiasmo. Di recente ho costruito My Book Club, un’app per i gruppi di lettura: il Ciclo mensile, dalla scelta del Genere al voto finale, in un unico posto. È online e chiunque può fondare un Club. Studio anche l’AI e gli agenti (harness, Claude Agent SDK, MCP) e tengo un second brain personale gestito con Claude Code.",
     "closing": "Hai un progetto in mente? Scrivimi.",
     "portraitAlt": "Ritratto di Antonio Fabrizio Fiume",
-    "catAlt": "Cody, un cane color fulvo e bianco seduto in cucina, di profilo.",
+    "catAlt": "Cody, un cane color fulvo con una striscia bianca sulla fronte, guarda dritto in camera.",
     "catCaption": "Cody, il mio cane."
   },
   "background": {
@@ -75,15 +75,12 @@
   },
   "contact": {
     "title": "Contattami",
-    "subtitle": "Lavoriamo insieme",
     "email": "Email",
     "prompt1": "Hai un progetto o un’idea?",
-    "prompt2": "Scrivimi per email.",
-    "harbourAlt": "Il porto di Napoli, dipinto di Oswald Achenbach, 1859"
+    "prompt2": "Scrivimi per email."
   },
   "footer": {
     "rights": "Tutti i diritti riservati",
-    "credits": "Immagini: porto di Napoli, O. Achenbach, CC BY-SA 2.0; biblioteca, rawpixel, CC0. Da Wikimedia Commons e rawpixel.",
-    "write": "Scrivimi una mail"
+    "credits": "Immagine: biblioteca, rawpixel, CC0. Da rawpixel."
   }
 }

@@ -1,50 +1,54 @@
 <template>
-  <section id="about" class="frame mx-auto max-w-[110rem] py-24 md:py-32">
-    <h2 class="sr-only">{{ t('about.title') }}</h2>
-    <div class="grid gap-12 md:grid-cols-[3fr_1fr] md:gap-16">
-      <p
-        data-reveal
-        class="text-[1.0625rem] leading-[1.5] md:text-[clamp(1.125rem,1.7vw,1.5rem)] md:leading-[1.3] md:columns-2 md:gap-12 md:text-justify md:hyphens-auto"
-        :lang="locale"
-      >
-        <!-- Sul telefono il testo va a capo per paragrafi e il primo è più grande; da md in su scorre come un'unica colonna. -->
-        <span v-for="(para, k) in paragraphs" :key="k" :class="k === 0 ? 'max-md:mb-6 max-md:block max-md:text-[1.5rem] max-md:leading-[1.25]' : 'max-md:mb-5 max-md:block'">
+  <section id="about" data-field class="field overflow-x-clip" style="background: var(--f-about); color: var(--f-ink)">
+    <div class="frame mx-auto max-w-[110rem] py-20 md:py-28">
+    <h2 class="text-title font-display font-bold" data-reveal>{{ t('about.title') }}</h2>
+    <div class="mt-10 grid gap-12 md:mt-14 md:grid-cols-[minmax(0,60ch)_1fr] md:gap-16 lg:gap-24">
+      <div class="text-[1.0625rem] leading-[1.55] md:text-xl md:leading-[1.5]" :lang="locale">
+        <p
+          v-for="(para, k) in paragraphs"
+          :key="k"
+          data-reveal
+          :class="k === 0 ? 'mb-6 max-md:text-[1.5rem] max-md:leading-[1.25]' : 'mb-5'"
+        >
           <template v-for="(part, i) in para" :key="i">
-            <mark v-if="part.mark" class="mark" :style="{ backgroundColor: part.color }">{{ part.text }}</mark>
+            <mark v-if="part.mark" class="mark" :style="{ '--mc': part.color }">{{ part.text }}</mark>
             <template v-else>{{ part.text }}</template>
           </template>
-          {{ ' ' }}
-        </span>
+        </p>
         <a
           href="#contact"
-          class="mt-8 inline-flex min-h-12 items-center bg-accent px-4 py-2 font-medium text-on-accent max-md:w-full press hover:-translate-y-0.5"
+          class="btn mt-6 inline-flex min-h-12 items-center px-6 py-2 font-medium max-md:w-full press"
+          style="--b-bg: #14141a; --b-ink: #ffffff; --b-sweep: var(--m-violet)"
         >
           {{ t('about.closing') }}
         </a>
-      </p>
-      <div class="flex flex-col gap-10 md:self-start">
-        <figure data-reveal class="m-0">
+      </div>
+      <div class="md:self-start">
+        <div class="flex items-start pb-6">
           <img
+            data-reveal
+            style="--r: -2deg"
             src="/img/antonio.webp"
             :alt="t('about.portraitAlt')"
             width="560"
             height="560"
             loading="lazy"
-            class="block w-full"
+            class="photo block aspect-[4/5] w-1/2 flex-1 object-cover"
           />
-        </figure>
-        <figure data-reveal style="--d: 120ms" class="m-0">
           <img
+            data-reveal
+            style="--d: 150ms; --r: 2deg"
             src="/img/cody.webp"
             :alt="t('about.catAlt')"
-            width="560"
-            height="700"
+            width="620"
+            height="770"
             loading="lazy"
-            class="block w-full"
+            class="photo relative z-10 -ml-6 mt-10 block aspect-[4/5] w-1/2 flex-1 object-cover md:-ml-8 md:mt-14"
           />
-          <figcaption class="mt-3 text-sm text-muted">{{ t('about.catCaption') }}</figcaption>
-        </figure>
+        </div>
+        <p class="mt-3 text-right text-sm">{{ t('about.catCaption') }}</p>
       </div>
+    </div>
     </div>
   </section>
 </template>
@@ -57,13 +61,13 @@ const { t, locale } = useI18n()
 
 // Parole del testo evidenziate (uguali in italiano e inglese), nei colori dei Generi di My Book Club.
 const marks = [
-  ['Vue.js', 'var(--s-green)'],
-  ['Campania in Salute', 'var(--s-blue)'],
-  ['Ionic + Vue', 'var(--s-amber)'],
-  ['PWA', 'var(--s-pink)'],
-  ['Node.js', 'var(--s-orange)'],
-  ['My Book Club', 'var(--s-blue)'],
-  ['second brain', 'var(--s-green)'],
+  ['Vue.js', 'var(--m-green)'],
+  ['Campania in Salute', 'var(--m-blue)'],
+  ['Ionic + Vue', 'var(--m-violet)'],
+  ['PWA', 'var(--m-pink)'],
+  ['Node.js', 'var(--m-red)'],
+  ['My Book Club', 'var(--m-blue)'],
+  ['second brain', 'var(--m-green)'],
 ] as const
 
 // Il testo è un'unica stringa i18n: lo spezzo ogni due frasi; ogni parola evidenziata vale solo alla prima occorrenza.

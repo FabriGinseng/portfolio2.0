@@ -1,7 +1,7 @@
 // Fa comparire ogni [data-reveal] quando entra nello schermo; senza IntersectionObserver restano visibili.
 export function useReveal() {
   if (!('IntersectionObserver' in window)) {
-    document.querySelectorAll('[data-reveal]').forEach((el) => el.classList.add('is-in'))
+    document.querySelectorAll('[data-reveal],[data-field],[data-letters]').forEach((el) => el.classList.add('is-in'))
     return
   }
   const io = new IntersectionObserver(
@@ -15,5 +15,5 @@ export function useReveal() {
     },
     { rootMargin: '0px 0px -10% 0px' },
   )
-  document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el))
+  document.querySelectorAll('[data-reveal],[data-field],[data-letters]').forEach((el) => io.observe(el))
 }
