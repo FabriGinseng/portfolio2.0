@@ -1,52 +1,50 @@
 <template>
-  <section id="contact" class="border-t border-line py-24 md:py-32">
-    <div class="mx-auto grid max-w-6xl gap-16 px-5 md:grid-cols-2 md:px-8">
-      <div>
-        <h2 class="font-display text-4xl font-semibold tracking-tight md:text-6xl">{{ t('contact.title') }}</h2>
-        <p class="mt-4 max-w-[40ch] text-lg text-muted">{{ t('contact.subtitle') }}</p>
-        <a
-          href="mailto:antoniofabriziofiume95@gmail.com"
-          class="mt-8 inline-block break-all font-display text-xl font-semibold text-accent underline decoration-1 underline-offset-4 md:text-2xl"
-        >
-          antoniofabriziofiume95@gmail.com
-        </a>
-        <ul class="mt-8 flex gap-6">
-          <li>
-            <a href="https://github.com/fabriGinseng" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-muted hover:text-ink">
-              <Github :size="18" /> GitHub
-            </a>
-          </li>
-          <li>
-            <a href="https://www.linkedin.com/in/antonio-fabrizio-fiume-13345a160/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-muted hover:text-ink">
-              <Linkedin :size="18" /> LinkedIn
-            </a>
-          </li>
-        </ul>
+  <section id="contact" class="frame mx-auto max-w-[110rem] py-24 md:py-32">
+    <div class="grid gap-14 md:grid-cols-2 md:gap-20">
+      <div data-reveal>
+        <p class="font-display text-2xl font-semibold text-muted">{{ t('contact.prompt1') }}</p>
+        <h2 class="text-head mt-3 font-display font-bold leading-[1] tracking-[-0.035em]">{{ t('contact.prompt2') }}</h2>
+        <dl class="mt-12 space-y-5">
+          <div>
+            <dt class="text-muted">{{ t('contact.email') }}</dt>
+            <dd><a href="mailto:antoniofabriziofiume95@gmail.com" class="break-all font-display text-2xl font-semibold text-accent underline underline-offset-4">antoniofabriziofiume95@gmail.com</a></dd>
+          </div>
+          <div>
+            <dt class="text-muted">GitHub</dt>
+            <dd><a href="https://github.com/fabriGinseng" target="_blank" rel="noopener noreferrer" class="font-medium underline underline-offset-4 hover:text-accent">github.com/fabriGinseng</a></dd>
+          </div>
+          <div>
+            <dt class="text-muted">LinkedIn</dt>
+            <dd><a href="https://www.linkedin.com/in/antonio-fabrizio-fiume-13345a160/" target="_blank" rel="noopener noreferrer" class="font-medium underline underline-offset-4 hover:text-accent">Antonio Fabrizio Fiume</a></dd>
+          </div>
+        </dl>
+        <img src="/img/naples-harbour.jpg" :alt="t('contact.harbourAlt')" width="1200" height="743" loading="lazy" class="mt-12 block w-full" />
       </div>
 
-      <form ref="contactForm" @submit.prevent="handleSubmit" class="space-y-6">
+      <form ref="contactForm" @submit.prevent="handleSubmit" class="space-y-5" data-reveal style="--d: 120ms">
         <div class="space-y-2">
-          <label for="name" class="block text-sm font-medium">{{ t('contact.name') }}</label>
-          <input id="name" v-model="form.name" name="from_name" type="text" required autocomplete="name" class="w-full rounded-md border border-field bg-transparent px-4 py-3 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent" />
+          <label for="name" class="block font-medium">{{ t('contact.name') }}</label>
+          <input id="name" v-model="form.name" name="from_name" type="text" required autocomplete="name" class="h-14 w-full bg-surface px-5 text-ink focus:outline-none focus:ring-2 focus:ring-accent" />
         </div>
         <div class="space-y-2">
-          <label for="email" class="block text-sm font-medium">{{ t('contact.email') }}</label>
-          <input id="email" v-model="form.email" name="reply_to" type="email" required autocomplete="email" class="w-full rounded-md border border-field bg-transparent px-4 py-3 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent" />
+          <label for="email" class="block font-medium">{{ t('contact.email') }}</label>
+          <input id="email" v-model="form.email" name="reply_to" type="email" required autocomplete="email" class="h-14 w-full bg-surface px-5 text-ink focus:outline-none focus:ring-2 focus:ring-accent" />
         </div>
         <div class="space-y-2">
-          <label for="message" class="block text-sm font-medium">{{ t('contact.message') }}</label>
-          <textarea id="message" v-model="form.message" name="message" rows="5" required class="w-full rounded-md border border-field bg-transparent px-4 py-3 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent resize-none"></textarea>
+          <label for="message" class="block font-medium">{{ t('contact.message') }}</label>
+          <textarea id="message" v-model="form.message" name="message" rows="5" required class="w-full resize-none bg-surface px-5 py-4 text-ink focus:outline-none focus:ring-2 focus:ring-accent"></textarea>
         </div>
 
         <button
           type="submit"
           :disabled="isSubmitting"
-          class="w-full whitespace-nowrap rounded-md bg-accent px-6 py-3.5 font-medium text-on-accent transition-transform active:scale-[0.98] disabled:opacity-50 md:w-auto"
+          class="inline-flex min-h-12 w-full items-center justify-center gap-2 whitespace-nowrap bg-accent px-7 py-3 font-medium text-on-accent transition-transform hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-60 md:w-auto"
         >
           {{ isSubmitting ? t('contact.sending') : t('contact.send') }}
+          <ArrowRight :size="18" />
         </button>
 
-        <p v-if="submitStatus" role="status" class="text-sm font-medium" :class="submitStatus === 'success' ? 'text-ink' : 'text-danger'">
+        <p v-if="submitStatus" role="status" class="font-medium" :class="submitStatus === 'success' ? 'text-ink' : 'text-danger'">
           {{ submitStatus === 'success' ? t('contact.success') : t('contact.error') }}
         </p>
       </form>
@@ -57,7 +55,7 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { Github, Linkedin } from 'lucide-vue-next'
+import { ArrowRight } from 'lucide-vue-next'
 import emailjs from '@emailjs/browser'
 
 const { t } = useI18n()

@@ -1,141 +1,45 @@
-# 🚀 Portfolio - Antonio Fabrizio Fiume
+# Portfolio
 
-Modern and responsive personal portfolio built with Vue 3, TypeScript, and TailwindCSS.
+Sito personale di Antonio Fabrizio Fiume, in italiano e inglese. Online su Vercel, pubblicato da `main`.
 
-![Vue 3](https://img.shields.io/badge/Vue.js-3.x-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/Tailwind-4.x-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-7.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+## Stack
 
-## ✨ Features
+Vue 3 · TypeScript · Vite 7 · Tailwind 4 · vue-i18n · EmailJS (form contatti) · Zod (schema dei Progetti, solo in build e nei test).
 
-- 🎨 **Modern Design**: Clean minimalist interface with smooth animations
-- 🌗 **Light/Dark Mode**: Theme toggle with saved preferences  
-- 🌍 **Multilingual**: Full Italian and English support (vue-i18n)
-- 📱 **Responsive**: Optimized for all devices
-- ⚡ **Performance**: Fast loading with code splitting
-- 🎭 **Animations**: Parallax effects and smooth transitions
-- ♿ **Accessible**: WCAG compliant components
-- 📧 **Contact Form**: Functional email form with EmailJS
-
-## 🛠️ Tech Stack
-
-**Core:** Vue 3, TypeScript, Vite, Vue Router  
-**Styling:** TailwindCSS v4, CSS Custom Properties  
-**UI:** Radix Vue, Lucide Icons  
-**i18n:** Vue I18n (IT/EN)  
-**Email:** EmailJS  
-**Utils:** VueUse, class-variance-authority
-
-## 🚀 Quick Start
+## Avvio
 
 ```bash
-# Install dependencies
 npm install
-
-# Start dev server
 npm run dev
-
-# Build for production
-npm run build
+SKIP_SYNC=1 npm run build   # build senza chiamare GitHub
+npm test
 ```
 
-## 📧 EmailJS Setup
+`npm run build` esegue prima `prebuild` (sync dei Progetti da GitHub, vedi sotto); con `SKIP_SYNC=1` lo salta. Il form contatti legge `VITE_EMAILJS_SERVICE_ID` e `VITE_EMAILJS_TEMPLATE_ID` da `.env` (modello in `.env.example`; template: `from_name`, `reply_to`, `message`).
 
-1. Create account at [emailjs.com](https://www.emailjs.com/)
-2. Add email service and get Service ID
-3. Create template and get Template ID  
-4. Update `.env` file:
+## Progetti
 
-```env
-VITE_EMAILJS_SERVICE_ID=your_service_id
-VITE_EMAILJS_TEMPLATE_ID=your_template_id
-```
+Un solo elenco, unito da `src/data/projects.ts`:
 
-**Template variables:** `to_email`, `to_name`, `from_name`, `from_email`, `message`, `reply_to`
+- `src/data/projects.curated.json`: Progetti scritti a mano (anche privati, come My Book Club). Il primo per `order` è il Progetto in primo piano.
+- `src/data/projects.synced.json`: generato da `scripts/sync-projects.ts` dai repo GitHub con topic `portfolio` e un `portfolio.json` valido (ignorato da git).
+- Un'Action (`.github/workflows/rebuild.yml`) ricostruisce il sito ogni giorno alle 06:17 UTC tramite l'API di Vercel.
 
-## ⚙️ Configuration
+Vocabolario in `GLOSSARY.md`, specifica in `docs/wayfinder/SPEC.md`.
 
-### Colors
+## Grafica
 
-Edit `src/style.css`:
+Direzione «solo tipografia»: nome enorme, campi di colore intero (salvia e carbone, con tema chiaro), dorsi colorati come i Generi di My Book Club. Font Bricolage Grotesque e Geist; palette e token in `src/style.css`. Le immagini trovate (mappa di Napoli 1754, porto di Napoli, biblioteca) hanno fonte e licenza in `docs/credits.json` e il credito nel footer.
 
-```css
-:root {
-  --color-primary: 210 100% 45%;    /* Blue */
-  --color-secondary: 282 83% 55%;   /* Purple */
-  --color-accent: 142 76% 36%;      /* Green */
-}
-```
-
-### Content
-
-- **Education**: `src/components/Background.vue`
-- **Experience**: `src/components/Experience.vue`  
-- **Projects**: `src/components/Projects.vue`
-- **Translations**: `src/i18n/locales/en.json` and `it.json`
-
-### Default Language
-
-Edit `src/i18n/index.ts`:
-
-```typescript
-locale: 'it', // Change to 'en' for English
-```
-
-## 📁 Project Structure
+## Struttura
 
 ```
-src/
-├── components/      # Vue components
-├── composables/     # Vue composables (useTheme)
-├── i18n/           # Internationalization
-├── router/         # Vue Router config
-├── views/          # Page views
-└── style.css       # Global styles
+src/components/   sezioni della pagina (Hero, About, Projects, Experience, Contact, Footer, Header)
+src/composables/  useTheme (tema chiaro/scuro), useReveal (comparsa allo scroll)
+src/data/         schema, merge e file dei Progetti
+src/i18n/         testi in italiano e inglese
+scripts/          sync dei Progetti da GitHub
+docs/             specifica, mappa wayfinder, crediti immagini
 ```
 
-## 🎨 Sections
-
-- **Hero**: Landing with parallax effects
-- **About**: Personal intro with stats
-- **Background**: Education timeline
-- **Experience**: Work history with tech badges
-- **Projects**: Portfolio showcase
-- **Contact**: Email form + social links
-- **Footer**: Site info and links
-
-## 🔧 Scripts
-
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production |
-| `npm run preview` | Preview production build |
-
-## 🌐 Deploy
-
-```bash
-npm run build
-# Deploy 'dist' folder to:
-# - Vercel (recommended)
-# - Netlify
-# - GitHub Pages
-# - Cloudflare Pages
-```
-
-## 👤 Author
-
-**Antonio Fabrizio Fiume**
-
-- GitHub: [@fabriGinseng](https://github.com/fabriGinseng)
-- LinkedIn: [Antonio Fabrizio Fiume](https://www.linkedin.com/in/antonio-fabrizio-fiume-13345a160/)
-- Email: antoniofabriziofiume95@gmail.com
-
-## 📄 License
-
-MIT License - Feel free to use this template for your own portfolio!
-
----
-
-Made with ❤️ using Vue 3 + TypeScript + TailwindCSS
+Regole di lavoro per chi modifica il codice: `CLAUDE.md`.

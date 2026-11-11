@@ -1,44 +1,64 @@
 <template>
-  <section id="projects" class="border-t border-line py-24 md:py-32">
-    <div class="mx-auto max-w-6xl px-5 md:px-8">
-      <h2 class="font-display text-3xl font-semibold tracking-tight md:text-4xl">{{ t('projects.title') }}</h2>
+  <section id="projects">
+    <h2 class="sr-only">{{ t('projects.title') }}</h2>
 
-      <ul class="mt-12 grid gap-x-16 md:grid-cols-2">
+    <!-- Il primo Progetto (order più basso) occupa un campo di colore intero. -->
+    <div v-if="lead" class="bg-feature py-24 text-[#1c1c1c] md:py-36">
+      <div class="frame mx-auto grid max-w-[110rem] items-center gap-12 md:grid-cols-2 md:gap-16">
+        <div data-reveal>
+          <img src="/img/my-book-club.jpg" alt="" width="64" height="64" class="mb-8 block h-16 w-16" />
+          <h3 class="text-head font-display font-bold leading-[0.92] tracking-[-0.04em]">{{ lead.title }}</h3>
+          <p class="mt-8 max-w-[44ch] text-2xl leading-snug">{{ lead.description[lang] }}</p>
+          <p class="mt-4 font-medium">{{ lead.technologies.join(', ') }}</p>
+          <a
+            v-if="lead.liveUrl"
+            :href="lead.liveUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-10 inline-flex min-h-12 items-center gap-2 bg-[#1c1c1c] px-7 py-3 font-medium text-[#efeee9] transition-transform hover:-translate-y-0.5 active:scale-[0.98]"
+          >
+            {{ t('projects.open') }}
+            <ArrowUpRight :size="18" />
+          </a>
+        </div>
+        <img
+          v-if="lead.image"
+          data-reveal
+          style="--d: 120ms"
+          :src="lead.image"
+          :alt="lead.title"
+          width="1200"
+          height="630"
+          class="block w-full"
+        />
+      </div>
+    </div>
+
+    <!-- Gli altri Progetti: un dorso per libro. -->
+    <div class="frame mx-auto max-w-[110rem] py-24 md:py-36">
+      <div class="flex flex-col justify-between gap-2 md:flex-row md:items-baseline">
+        <h3 class="font-display text-2xl font-bold tracking-tight">{{ t('projects.subtitle') }}</h3>
+        <p class="text-muted">{{ t('projects.shelf') }}</p>
+      </div>
+      <ul class="mt-10 flex flex-wrap items-end gap-[6px] md:flex-nowrap md:h-[28rem]">
         <li
-          v-for="(project, index) in projects"
+          v-for="(project, i) in shelf"
           :key="project.id"
-          class="border-t border-line py-8"
-          :class="index === 0 ? 'md:col-span-2 md:py-12' : ''"
+          data-reveal
+          :style="{ '--d': `${i * 60}ms` }"
+          class="w-full md:h-full md:w-auto md:min-w-0 md:flex-1 md:basis-0 md:max-w-28"
         >
           <component
             :is="project.liveUrl ? 'a' : 'div'"
             :href="project.liveUrl"
             :target="project.liveUrl ? '_blank' : undefined"
             :rel="project.liveUrl ? 'noopener noreferrer' : undefined"
-            class="group flex gap-5"
+            class="spine flex h-full items-baseline gap-3 overflow-hidden px-4 py-3 text-[#1c1c1c] md:block md:px-3 md:py-5"
+            :style="{ backgroundColor: colors[i % colors.length] }"
+            :aria-label="`${project.title}: ${project.description[lang]}`"
           >
-            <img
-              :src="project.icon"
-              alt=""
-              loading="lazy"
-              class="shrink-0 rounded-md bg-line object-cover"
-              :class="index === 0 ? 'h-16 w-16 md:h-20 md:w-20' : 'h-12 w-12'"
-            />
-            <div class="min-w-0">
-              <h3
-                class="flex items-start gap-2 font-display font-semibold tracking-tight group-hover:text-accent"
-                :class="index === 0 ? 'text-3xl md:text-4xl' : 'text-xl'"
-              >
-                {{ project.title }}
-                <ArrowUpRight
-                  v-if="project.liveUrl"
-                  :size="index === 0 ? 28 : 20"
-                  class="mt-1 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                />
-              </h3>
-              <p class="mt-3 max-w-[60ch] text-muted">{{ project.description[lang] }}</p>
-              <p class="mt-4 text-sm">{{ project.technologies.join(', ') }}</p>
-            </div>
+            <span class="font-bold md:block md:whitespace-nowrap">{{ project.title }}</span>
+            <span class="font-medium md:block md:whitespace-nowrap">{{ project.technologies[0] }}</span>
           </component>
         </li>
       </ul>
@@ -54,4 +74,7 @@ import { projects } from '@/data/projects'
 
 const { t, locale } = useI18n()
 const lang = computed(() => (locale.value === 'it' ? 'it' : 'en'))
+const lead = projects[0] as (typeof projects)[number] & { image?: string }
+const shelf = projects.slice(1)
+const colors = ['var(--s-blue)', 'var(--s-orange)', 'var(--s-green)', 'var(--s-pink)', 'var(--s-amber)']
 </script>
