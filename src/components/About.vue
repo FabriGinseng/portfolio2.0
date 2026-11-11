@@ -17,21 +17,34 @@
         </span>
         <a
           href="#contact"
-          class="mt-8 inline-flex min-h-12 items-center bg-accent px-4 py-2 font-medium text-on-accent max-md:w-full transition-transform hover:-translate-y-0.5"
+          class="mt-8 inline-flex min-h-12 items-center bg-accent px-4 py-2 font-medium text-on-accent max-md:w-full press hover:-translate-y-0.5"
         >
           {{ t('about.closing') }}
         </a>
       </p>
-      <figure data-reveal style="--d: 120ms" class="m-0 overflow-hidden md:self-start">
-        <img
-          src="/img/naples-1754.jpg"
-          :alt="t('about.mapAlt')"
-          width="1000"
-          height="915"
-          loading="lazy"
-          class="drift block w-full object-cover"
-        />
-      </figure>
+      <div class="flex flex-col gap-10 md:self-start">
+        <figure data-reveal class="m-0">
+          <img
+            src="/img/antonio.webp"
+            :alt="t('about.portraitAlt')"
+            width="560"
+            height="560"
+            loading="lazy"
+            class="block w-full"
+          />
+        </figure>
+        <figure data-reveal style="--d: 120ms" class="m-0">
+          <img
+            src="/img/cody.webp"
+            :alt="t('about.catAlt')"
+            width="560"
+            height="700"
+            loading="lazy"
+            class="block w-full"
+          />
+          <figcaption class="mt-3 text-sm text-muted">{{ t('about.catCaption') }}</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 </template>

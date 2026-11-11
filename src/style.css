@@ -8,18 +8,18 @@
   --surface: #e2e1da;
   --ink: #1c1c1c;
   --muted: #4a4c47;
-  --accent: #3d5a3e;
+  --accent: #2f6b3a;
   --on-accent: #ffffff;
   --danger: #b3261e;
-  --feature: #b9c9b6;
+  --feature: #a9d8a0;
   --inv-bg: #1c1c1c;
   --inv-ink: #efeee9;
   --inv-muted: #b4b5b0;
-  --s-blue: #7fb0ee;
-  --s-orange: #f2a07c;
-  --s-green: #6fd1ac;
-  --s-pink: #eda3bf;
-  --s-amber: #e8bd5c;
+  --s-blue: #6aa8f0;
+  --s-orange: #f6935f;
+  --s-green: #4fd69a;
+  --s-pink: #f08ab8;
+  --s-amber: #f0b534;
 }
 
 .dark {
@@ -27,10 +27,10 @@
   --surface: #2a2a2a;
   --ink: #f1f1ef;
   --muted: #b4b5b0;
-  --accent: #8fa68e;
+  --accent: #7fc48a;
   --on-accent: #1c1c1c;
   --danger: #ff8a80;
-  --feature: #8fa68e;
+  --feature: #9fd9a6;
   --inv-bg: #c8c5ba;
   --inv-ink: #1c1c1c;
   --inv-muted: #3e3f3b;
@@ -125,6 +125,15 @@
     transform: translateY(-14px);
   }
 }
+@media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
+  .spine {
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .spine:hover,
+  .spine:focus-visible {
+    transform: translateY(-14px) rotate(-2deg);
+  }
+}
 
 /* Movimento. Sotto reduced-motion restano contenuti fermi e visibili. */
 @media (prefers-reduced-motion: no-preference) {
@@ -148,7 +157,7 @@
   }
   .line-mask > span {
     display: block;
-    animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: rise 1s cubic-bezier(0.34, 1.56, 0.64, 1) both;
   }
   .line-mask:nth-child(2) > span {
     animation-delay: 0.11s;
@@ -157,6 +166,26 @@
     animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both;
   }
 
+  /* Bottoni: rimbalzo morbido alla pressione (scala) e al ritorno (traslazione). */
+  .press {
+    transition:
+      translate 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+      scale 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .press:active {
+    scale: 0.96;
+    transition-duration: 0.12s;
+  }
+
+  /* Telefono: le barre dello scaffale scorrono da sinistra, una dopo l'altra. */
+  @media (max-width: 767.98px) {
+    .js .shelf-item[data-reveal] {
+      transform: translateX(-2.5rem);
+    }
+    .js .shelf-item[data-reveal].is-in {
+      transform: none;
+    }
+  }
 }
 /* Lo zoom continuo solo da md in su: sul telefono pesa sullo scorrimento. */
 @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {

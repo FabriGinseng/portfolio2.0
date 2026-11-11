@@ -4,7 +4,7 @@ Sito personale di Antonio Fabrizio Fiume, in italiano e inglese. Online su Verce
 
 ## Stack
 
-Vue 3 · TypeScript · Vite 7 · Tailwind 4 · vue-i18n · EmailJS (form contatti) · Zod (schema dei Progetti, solo in build e nei test).
+Vue 3 · TypeScript · Vite 7 · Tailwind 4 · vue-i18n · Zod (schema dei Progetti, solo in build e nei test).
 
 ## Avvio
 
@@ -15,7 +15,7 @@ SKIP_SYNC=1 npm run build   # build senza chiamare GitHub
 npm test
 ```
 
-`npm run build` esegue prima `prebuild` (sync dei Progetti da GitHub, vedi sotto); con `SKIP_SYNC=1` lo salta. Il form contatti legge `VITE_EMAILJS_SERVICE_ID` e `VITE_EMAILJS_TEMPLATE_ID` da `.env` (modello in `.env.example`; template: `from_name`, `reply_to`, `message`).
+`npm run build` esegue prima `prebuild` (sync dei Progetti da GitHub, vedi sotto); con `SKIP_SYNC=1` lo salta.
 
 ## Progetti
 

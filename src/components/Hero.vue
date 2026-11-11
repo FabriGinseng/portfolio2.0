@@ -2,7 +2,7 @@
   <section class="frame mx-auto flex min-h-[100dvh] max-w-[110rem] flex-col justify-end pb-14 pt-32 md:pb-20">
     <h1 class="font-display font-bold leading-[0.9] tracking-[-0.045em] text-[clamp(2.75rem,10.5vw,9.5rem)] max-md:text-[22vw]">
       <!-- Sul telefono resta «Fabrizio Fiume», molto più grande; il primo nome rimane per i lettori di schermo. -->
-      <span class="line-mask"><span class="whitespace-nowrap"><span class="max-md:sr-only">{{ given }} </span>{{ middle }}</span></span>
+      <span class="line-mask"><span class="whitespace-nowrap"><span class="max-md:sr-only">{{ given }}{{ ' ' }}</span>{{ middle }}</span></span>
       <span class="line-mask"><span class="whitespace-nowrap text-accent">{{ last }}</span></span>
     </h1>
 
@@ -14,7 +14,7 @@
       <div class="flex flex-col gap-4 md:flex-row md:flex-wrap md:items-center md:gap-x-8">
         <a
           href="#projects"
-          class="inline-flex min-h-14 items-center justify-center gap-2 max-md:w-full md:min-h-12 whitespace-nowrap bg-accent px-7 py-3 font-medium text-on-accent transition-transform hover:-translate-y-0.5 active:scale-[0.98]"
+          class="inline-flex min-h-14 items-center justify-center gap-2 max-md:w-full md:min-h-12 whitespace-nowrap press bg-accent px-7 py-3 font-medium text-on-accent hover:-translate-y-0.5"
         >
           {{ t('hero.cta') }}
           <ArrowDown :size="18" />

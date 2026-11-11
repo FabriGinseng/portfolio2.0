@@ -24,7 +24,9 @@
     "subtitle": "A brief introduction",
     "description": "Hi! I’m Fabrizio, a Full-Stack Developer with a strong passion for Front-End and mobile development. I’ve had the chance to work on several ambitious projects, including “Campania in Salute”, an app that allows citizens to manage their healthcare directly from home. I took part in its design, development, and delivery — and it’s definitely one of the projects I’m most proud of. I love working with Vue.js (fast, flexible, and fun to use!) and I have experience building web apps with Ionic + Vue, as well as developing tools with Flask + Python (like a custom printing software for ESC/POS). Lately, I’ve been focusing on migrating legacy projects into modern solutions, building custom PWA that are responsive on every device. Always curious and eager to learn, I’ve also explored Docker and DevOps technologies to round out my skill set, along with backend development using Node.js. In short: I love building, innovating, and growing while embracing new challenges with enthusiasm. Recently I built My Book Club, an app for reading groups: the monthly Cycle, from picking the Genre to the final vote, in one place. It is live and anyone can found a Club. I also study AI and agents (harness, Claude Agent SDK, MCP) and keep a personal second brain run with Claude Code.",
     "closing": "Got a project in mind? Write to me.",
-    "mapAlt": "Map of the Gulf of Naples, 1754"
+    "portraitAlt": "Portrait of Antonio Fabrizio Fiume",
+    "catAlt": "Cody, a tan and white dog sitting in a kitchen, in profile.",
+    "catCaption": "Cody, my dog."
   },
   "background": {
     "title": "Background & Education",
@@ -74,20 +76,14 @@
   "contact": {
     "title": "Get In Touch",
     "subtitle": "Let's work together",
-    "name": "Name",
     "email": "Email",
-    "message": "Message",
-    "send": "Send Message",
-    "sending": "Sending...",
-    "success": "Message sent successfully!",
-    "error": "Failed to send message. Please try again.",
     "prompt1": "Got a project or an idea?",
     "prompt2": "Tell me about it.",
     "harbourAlt": "The harbour of Naples, painting by Oswald Achenbach, 1859"
   },
   "footer": {
     "rights": "All rights reserved",
-    "credits": "Images: map of Naples, P. Gaultier, 1754, public domain; harbour of Naples, O. Achenbach, CC BY-SA 2.0; library, rawpixel, CC0. Via Wikimedia Commons and rawpixel.",
+    "credits": "Images: harbour of Naples, O. Achenbach, CC BY-SA 2.0; library, rawpixel, CC0. Via Wikimedia Commons and rawpixel.",
     "write": "Send me an email"
   }
 }

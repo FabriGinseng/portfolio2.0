@@ -15,7 +15,7 @@
             :href="lead.liveUrl"
             target="_blank"
             rel="noopener noreferrer"
-            class="mt-10 inline-flex min-h-12 items-center gap-2 bg-[#1c1c1c] px-7 py-3 font-medium text-[#efeee9] transition-transform hover:-translate-y-0.5 active:scale-[0.98]"
+            class="mt-10 inline-flex min-h-12 items-center gap-2 bg-[#1c1c1c] px-7 py-3 font-medium text-[#efeee9] press hover:-translate-y-0.5"
           >
             {{ t('projects.open') }}
             <ArrowUpRight :size="18" />
@@ -41,11 +41,13 @@
         <p class="text-muted">{{ t('projects.shelf') }}</p>
       </div>
       <!-- Telefono: una pila di libri, una barra per progetto; da md in su i dorsi stanno in piedi sullo scaffale. -->
-      <ul data-reveal class="mt-10 flex flex-col gap-[6px] md:h-[28rem] md:flex-row md:items-end">
+      <ul class="mt-10 flex flex-col gap-[6px] md:h-[28rem] md:flex-row md:items-end">
         <li
           v-for="(project, i) in shelf"
           :key="project.id"
-          class="md:h-full md:min-w-0 md:max-w-28 md:flex-1 md:basis-0"
+          data-reveal
+          class="shelf-item md:h-full md:min-w-0 md:max-w-28 md:flex-1 md:basis-0"
+          :style="{ '--d': `${i * 90}ms` }"
         >
           <component
             :is="project.liveUrl ? 'a' : 'div'"
