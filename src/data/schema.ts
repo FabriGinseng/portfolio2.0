@@ -6,6 +6,7 @@ export const ManifestSchema = z.object({
   description: z.object({ it: z.string().min(1), en: z.string().min(1) }),
   technologies: z.array(z.string().min(1)).min(1),
   icon: z.string().optional(),
+  image: z.string().optional(), // immagine larga del progetto in primo piano
   liveUrl: z.url().optional(),
   order: z.number().optional(),
 })

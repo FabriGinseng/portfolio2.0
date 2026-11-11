@@ -23,3 +23,7 @@ _Avoid_: Config, metadata
 **Agente di redazione**:
 L'agente LangGraph che legge un repo con topic `portfolio` e senza Manifest e propone un Manifest in una PR sul repo, per la revisione umana.
 _Avoid_: Bot, generatore
+
+**Progetto in primo piano**:
+Il Progetto con `order` più basso: occupa un campo di colore intero e può avere un'immagine larga (`image`). Oggi è My Book Club.
+_Avoid_: Featured, hero project

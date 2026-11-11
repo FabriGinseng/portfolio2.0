@@ -4,7 +4,12 @@
     "background": "Background",
     "experience": "Experience",
     "projects": "Projects",
-    "contact": "Contact"
+    "contact": "Contact",
+    "label": "Main",
+    "light": "Light theme",
+    "dark": "Dark theme",
+    "menu": "Open menu",
+    "close": "Close menu"
   },
   "hero": {
     "greeting": "Hi, I'm",
@@ -17,9 +22,9 @@
   "about": {
     "title": "About Me",
     "subtitle": "A brief introduction",
-    "description": "Hi! I’m Fabrizio, a Full-Stack Developer with a strong passion for Front-End and mobile development. I’ve had the chance to work on several ambitious projects, including “Campania in Salute”, an app that allows citizens to manage their healthcare directly from home. I took part in its design, development, and delivery — and it’s definitely one of the projects I’m most proud of. I love working with Vue.js (fast, flexible, and fun to use!) and I have experience building web apps with Ionic + Vue, as well as developing tools with Flask + Python (like a custom printing software for ESC/POS). Lately, I’ve been focusing on migrating legacy projects into modern solutions, building custom PWA that are responsive on every device. Always curious and eager to learn, I’ve also explored Docker and DevOps technologies to round out my skill set, along with backend development using Node.js. In short: I love building, innovating, and growing while embracing new challenges with enthusiasm",
-    "years": "Years of experience",
-    "projects": "Projects"
+    "description": "Hi! I’m Fabrizio, a Full-Stack Developer with a strong passion for Front-End and mobile development. I’ve had the chance to work on several ambitious projects, including “Campania in Salute”, an app that allows citizens to manage their healthcare directly from home. I took part in its design, development, and delivery — and it’s definitely one of the projects I’m most proud of. I love working with Vue.js (fast, flexible, and fun to use!) and I have experience building web apps with Ionic + Vue, as well as developing tools with Flask + Python (like a custom printing software for ESC/POS). Lately, I’ve been focusing on migrating legacy projects into modern solutions, building custom PWA that are responsive on every device. Always curious and eager to learn, I’ve also explored Docker and DevOps technologies to round out my skill set, along with backend development using Node.js. In short: I love building, innovating, and growing while embracing new challenges with enthusiasm. Recently I built My Book Club, an app for reading groups: the monthly Cycle, from picking the Genre to the final vote, in one place. It is live and anyone can found a Club.",
+    "closing": "Got a project in mind? Write to me.",
+    "mapAlt": "Map of the Gulf of Naples, 1754"
   },
   "background": {
     "title": "Background & Education",
@@ -55,13 +60,16 @@
     "present": "Present",
     "sorint_description": "- Development of web platforms with Vue.js and Vuetify, building modern and responsive interfaces - Creation of web applications with Vue 3 and Vite, leveraging a fast and optimized build environment - Migration of legacy projects from Vue 2 to Vue 3, modernizing architecture and codebase - Backend development with Node.js and Fastify, focusing on scalable and high-performance APIs - Continuous training in unit testing with Jest and UX design, ensuring code quality and strong user experience focus",
     "gesan_description": "Developed and maintained multiple client projects with focus on mobile performance and user experience. Collaborated with cross-functional teams to define and implement innovative solutions.",
-    "ak12_description": "Started my career building responsive mobile/web applications and learning best practices."
+    "ak12_description": "Started my career building responsive mobile/web applications and learning best practices.",
+    "libraryAlt": "Shelves of an old library"
   },
   "projects": {
     "title": "Projects",
     "subtitle": "Things I've built",
     "viewProject": "View Project",
-    "viewCode": "View Code"
+    "viewCode": "View Code",
+    "shelf": "The other work, one book each.",
+    "open": "Open My Book Club"
   },
   "contact": {
     "title": "Get In Touch",
@@ -72,9 +80,14 @@
     "send": "Send Message",
     "sending": "Sending...",
     "success": "Message sent successfully!",
-    "error": "Failed to send message. Please try again."
+    "error": "Failed to send message. Please try again.",
+    "prompt1": "Got a project or an idea?",
+    "prompt2": "Tell me about it.",
+    "harbourAlt": "The harbour of Naples, painting by Oswald Achenbach, 1859"
   },
   "footer": {
-    "rights": "All rights reserved"
+    "rights": "All rights reserved",
+    "credits": "Images: map of Naples, P. Gaultier, 1754, public domain; harbour of Naples, O. Achenbach, CC BY-SA 2.0; library, rawpixel, CC0. Via Wikimedia Commons and rawpixel.",
+    "write": "Send me an email"
   }
 }
